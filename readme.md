@@ -3,6 +3,7 @@
 This is a focused rewrite of an earlier project.
 
 The main feature goals are as follows:
+
 - Provide a simple setup for any kind of 2D game, but focused on platformers
 - Avoid having too much logic and configuration
 - Support a simple level format
@@ -20,17 +21,26 @@ Put gtest files in the tests/ folder. Add each new file to the source list for a
 ### To do
 
 - Initial Setup
-        - cmake files
-- Integrate gtest
+  - ~~cmake files~~
+- ~~Integrate gtest~~
 - Renderer
-        - Set up GLFW and GLAD
-        - Basic shaders
-        - Basic methods to draw triangles and rectangles
+  - Set up GLFW and GLAD
+  - Basic shaders
+  - Basic methods to draw triangles and rectangles
 - Input
-        - Callbacks
+  - Callbacks
 - World representation
-        - Entities
-        - Behaviors
+  - Entities
+  - Behaviors
 - Load levels from file
+- Logging
 - Audio
 
+#### Stepping stones
+
+- Bring up a window
+- Draw triangle on screen
+- Process keyboard input
+- Move triangle with keyboard
+- Add texture to triangle
+- Draw items on screen from a level file
