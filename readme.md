@@ -13,6 +13,9 @@ Other goals:
 - Clean and consistent code style
 - Unit testing as much as possible
 
+### Testing
+
+Put gtest files in the tests/ folder. Add each new file to the source list for add_executable.
 
 ### To do
 

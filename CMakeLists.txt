@@ -10,5 +10,8 @@ add_library(simplicity_engine
 target_include_directories (simplicity_engine PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+# 3rd party modules
 add_subdirectory(3rd_party)
 
+# Unit tests
+add_subdirectory(test)
