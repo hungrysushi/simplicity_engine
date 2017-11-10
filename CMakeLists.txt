@@ -10,6 +10,10 @@ add_library(simplicity_engine
 target_include_directories (simplicity_engine PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+target_link_libraries(simplicity_engine LINK_PUBLIC
+        glfw ${GLFW_LIBRARIES}
+        glad)
+
 # 3rd party modules
 add_subdirectory(3rd_party)
 
