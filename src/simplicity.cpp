@@ -44,4 +44,13 @@ EngineError Simplicity::InitWindow(const int x, const int y, const std::string& 
         return EngineError::kSuccess;
 }
 
+/*
+ * This serves as a functional demo of the features and is an example
+ * workflow. As more features are added, they should also be added to
+ * the demo in some way.
+ */
+void Simplicity::Demo() {
+        // TODO
+}
+
 }  /* namespace simplicity */

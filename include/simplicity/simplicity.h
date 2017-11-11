@@ -15,6 +15,7 @@ public:
         ~Simplicity();
 
         EngineError InitWindow(const int x, const int y, const std::string& label);
+        void Demo();
 
         GLFWwindow* window_ = nullptr;
 };
