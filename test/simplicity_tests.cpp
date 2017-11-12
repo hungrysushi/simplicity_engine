@@ -23,8 +23,11 @@ protected:
 
 // Tests the window creation
 TEST_F(SimplicityTests, WindowCreation) {
+        EXPECT_EQ(engine.window_, nullptr);
+
         EngineError error = engine.InitWindow(400, 400, "TestWindow");
 
         EXPECT_EQ(EngineError::kSuccess, error);
+        EXPECT_NE(engine.window_, nullptr);
 }
 }  /* namespace simplicity */
