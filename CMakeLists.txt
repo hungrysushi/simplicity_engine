@@ -18,6 +18,7 @@ target_link_libraries(simplicity_engine LINK_PUBLIC
 add_subdirectory(3rd_party)
 
 # Unit tests
+enable_testing()
 add_subdirectory(test)
 
 # Test executable

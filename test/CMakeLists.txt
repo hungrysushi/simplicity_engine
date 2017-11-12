@@ -6,8 +6,6 @@ add_subdirectory(lib/googletest)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 include_directories(${gmock_SOURCE_DIR}/include ${gmock_SOURCE_DIR})
 
-enable_testing()
-
 add_executable(testengine
         test_main.cpp
         # include test files here
@@ -27,3 +25,5 @@ target_link_libraries(testengine
 
 # run our tests
 add_test(test-simplicity-engine testengine)
+add_custom_target(run_gtest testengine)
+add_dependencies(run_gtest testengine)

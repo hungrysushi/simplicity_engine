@@ -18,6 +18,19 @@ Other goals:
 
 Put gtest files in the tests/ folder. Add each new file to the source list for add_executable.
 
+The test binary is located at `build/test/testengine`.
+
+For convenience, tests can be automatically run with ctest using
+```
+make test
+```
+If any fail, the actual gtest executable can be run with
+```
+make run_gtest
+```
+which will provide more details about what exactly is failing.
+
+
 ### To do
 
 - Initial Setup
