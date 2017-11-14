@@ -3,8 +3,7 @@
  */
 #pragma once
 
-namespace simplicity
-{
+namespace simplicity {
 
 enum EngineError {
         kSuccess,

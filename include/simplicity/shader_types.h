@@ -2,7 +2,7 @@
 
 namespace simplicity {
 
-enum ShaderError {
+enum class ShaderError {
         kSuccess,
         kFileReadError,
         kVertexCompileError,

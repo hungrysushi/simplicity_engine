@@ -1,16 +1,22 @@
 #pragma once
 
-namespace game_engine {
+#include "simplicity/renderer_types.h"
+#include "simplicity/shader.h"
+
+namespace simplicity {
 
 class Renderer {
 public:
         Renderer();
         ~Renderer();
-        
+
+        RendererError Initialize(Shader shader);
         RendererError CreateTriangle();
         RendererError CreateRectangle();
         RendererError DrawObject();
         RendererError DrawWorld();
+
+        Shader shader_;
 };
 
-}  // namespace game_engine
+}  // namespace simplicity

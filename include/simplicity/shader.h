@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "simpicity/shader_types.h"
+#include "simplicity/shader_types.h"
 
 namespace simplicity {
 
@@ -12,7 +12,9 @@ public:
         ~Shader();
 
         ShaderError Initialize(const char* vertex_path, const char* fragment_path);
-        ShaderError Use();
+        ShaderError SetActive();
+
+        unsigned int shader_id_;
 };
 
 }  // namespace simplicity

@@ -1,7 +1,7 @@
 
 #include "simplicity/renderer.h"
 
-namespace game_engine {
+namespace simplicity {
 
 Renderer::Renderer() {
 
@@ -11,20 +11,28 @@ Renderer::~Renderer() {
 
 }
 
-RendererError CreateTriangle() {
+RendererError Renderer::Initialize(Shader shader) {
+        // Making an assumption here that we'll only use one type of shader.
+        // May change that later
+        shader_ = shader;
+
+        return RendererError::kSuccess;
+}
+
+RendererError Renderer::CreateTriangle() {
         // TODO
 }
 
-RendererError CreateRectangle() {
+RendererError Renderer::CreateRectangle() {
         // TODO
 }
 
-RendererError DrawObject() {
+RendererError Renderer::DrawObject() {
         // TODO
 }
 
-RendererError DrawWorld() {
+RendererError Renderer::DrawWorld() {
         // TODO
 }
 
-}  // namespace game_engine
+}  // namespace simplicity

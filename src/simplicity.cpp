@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include "simplicity/shader.h"
+
 namespace simplicity
 {
 
@@ -51,6 +53,11 @@ EngineError Simplicity::InitWindow(const int x, const int y, const std::string& 
  */
 void Simplicity::Demo() {
         // TODO
+
+        Shader shader;
+        shader.Initialize("../shaders/basic.vs", "../shaders/basic.fs");
+
+        renderer_.Initialize(shader);
 }
 
 }  /* namespace simplicity */

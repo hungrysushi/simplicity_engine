@@ -52,7 +52,8 @@ ShaderError Shader::Initialize(const char* vertex_path, const char* fragment_pat
         const char* vertex_code_char = vertex_code.c_str();
         const char* fragment_code_char = vertex_code.c_str();
 
-        unsigned int vertex, fragment, success;
+        unsigned int vertex, fragment;
+        int success;
         char log[512];
 
         // create the vertex shader
@@ -86,18 +87,20 @@ ShaderError Shader::Initialize(const char* vertex_path, const char* fragment_pat
         if (!success) {
                 glGetProgramInfoLog(shader_id_, 512, nullptr, log);
                 std::cout << "Program linking failed\n" << log << std::endl;
-                return ShaderError::kProgramLinkError
+                return ShaderError::kProgramLinkError;
         }
 
         // no longer need the shaders after we've linked them into a program
         glDeleteShader(vertex);
         glDeleteShader(fragment);
+
+        return ShaderError::kSuccess;
 }
 
 ShaderError Shader::SetActive() {
         glUseProgram(shader_id_);
 
-        return (glGetError() == GL_NO_ERROR) ? kSuccess : kShaderActiveError;
+        return (glGetError() == GL_NO_ERROR) ? ShaderError::kSuccess : ShaderError::kShaderActiveError;
 }
 
 }  // namespace simplicity

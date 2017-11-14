@@ -5,7 +5,10 @@ set (CMAKE_CXX_STANDARD 14)
 set (CMAKE_BUILD_TYPE Debug)
 
 add_library(simplicity_engine
-        src/simplicity.cpp)
+        src/simplicity.cpp
+        src/renderer.cpp
+        src/shader.cpp
+        )
 
 target_include_directories (simplicity_engine PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include)
