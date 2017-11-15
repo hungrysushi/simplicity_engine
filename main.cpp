@@ -1,4 +1,6 @@
 
+#define SHADER_DIR "../shaders/"
+
 #include <iostream>
 
 #include "simplicity/simplicity.h"

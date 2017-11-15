@@ -25,7 +25,7 @@ void main()
                                 0.0);  // this is a 2D system, don't need this
 
         // shift the shape coordinates to the normalized position
-        vec3 normal_position = pos + normal_view;
+        vec3 normal_position = position_coords + normal_view;
         gl_Position = vec4(normal_position, 1.0f);
 
         // this is just for fun. Change the color with respect to time and position

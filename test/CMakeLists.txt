@@ -10,6 +10,7 @@ add_executable(testengine
         test_main.cpp
         # include test files here
         simplicity_tests.cpp
+        shader_tests.cpp
         )
 
 # Link googletest and googlemock

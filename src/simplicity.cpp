@@ -54,6 +54,8 @@ EngineError Simplicity::InitWindow(const int x, const int y, const std::string& 
 void Simplicity::Demo() {
         // TODO
 
+        InitWindow(100, 100, "Demo");
+
         Shader shader;
         shader.Initialize("../shaders/basic.vs", "../shaders/basic.fs");
 

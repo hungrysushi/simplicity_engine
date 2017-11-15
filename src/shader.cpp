@@ -50,7 +50,7 @@ ShaderError Shader::Initialize(const char* vertex_path, const char* fragment_pat
         }
 
         const char* vertex_code_char = vertex_code.c_str();
-        const char* fragment_code_char = vertex_code.c_str();
+        const char* fragment_code_char = fragment_code.c_str();
 
         unsigned int vertex, fragment;
         int success;
