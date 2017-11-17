@@ -12,7 +12,7 @@ public:
 
         RendererError Initialize(Shader shader);
         RendererError CreateTriangle();
-        RendererError CreateRectangle();
+        RendererError CreateRectangle(const float x, const float y, const float scale);
         RendererError DrawObject();
         RendererError DrawWorld();
 

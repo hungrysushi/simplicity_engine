@@ -6,8 +6,10 @@ set (CMAKE_BUILD_TYPE Debug)
 
 add_library(simplicity_engine
         src/simplicity.cpp
+        # other engine sources should be added here
         src/renderer.cpp
         src/shader.cpp
+        src/world.cpp
         )
 
 target_include_directories (simplicity_engine PUBLIC

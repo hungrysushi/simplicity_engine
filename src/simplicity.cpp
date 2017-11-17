@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "simplicity/shader.h"
+#include "simplicity/world.h"
 
 namespace simplicity
 {
@@ -60,6 +61,26 @@ void Simplicity::Demo() {
         shader.Initialize("../shaders/basic.vs", "../shaders/basic.fs");
 
         renderer_.Initialize(shader);
+
+        // create the world
+        World world;
+
+        // create entities in shared pointers
+        // ex. RendererError renderer_err = renderer_.CreateRectangle(&entity);
+
+        // add entities to the world
+        // ex. WorldError world_err = world_.AddEntity(entity);
+
+        while (true) {
+                // update the world
+                // note: in order to update any of the entity characteristics,
+                // we will have to hold on to the objects.
+                // The other way to give entities behaviors is by callbacks
+
+                // render the world
+
+                // process input
+        }
 }
 
 }  /* namespace simplicity */
