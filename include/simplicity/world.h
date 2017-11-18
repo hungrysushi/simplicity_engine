@@ -4,7 +4,10 @@
  */
 #pragma once
 
+#include <vector>
+
 #include "simplicity/common_types.h"
+#include "simplicity/entity.h"
 #include "simplicity/world_types.h"
 
 namespace simplicity {
@@ -14,7 +17,7 @@ public:
         World();
         ~World();
         WorldError Initialize();
-        WorldError AddEntity();
+        WorldError AddEntity(const Entity& entity);
         WorldError PrintWorld();
 
         Vec2 x_dimensions_;
@@ -23,7 +26,7 @@ public:
         Vec4 background_color_;
 
         // vector of entities
-
+        std::vector<Entity> entities_;
 };
 
 }  // namespace simplicity
