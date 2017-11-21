@@ -18,6 +18,9 @@ public:
         Vec3 coords_;
 
         // TODO Vertex and textures
+        unsigned int vertex_id_;
+        unsigned int num_points_;
+        bool use_element_buffer_;
 };
 
 }  // namespace simplicity
