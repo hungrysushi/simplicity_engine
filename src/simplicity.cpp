@@ -68,6 +68,7 @@ void Simplicity::Demo() {
         // create entities in shared pointers
         // ex. RendererError renderer_err = renderer_.CreateRectangle(&entity);
         Entity entity("demo entity");
+        RendererError renderer_err = renderer_.CreateRectangle(5.0, 5.0, 0.5, entity);
 
         // add entities to the world
         // ex. WorldError world_err = world_.AddEntity(entity);
