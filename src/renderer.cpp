@@ -1,6 +1,8 @@
 
 #include "simplicity/renderer.h"
 
+#include "glad/glad.h"
+
 namespace simplicity {
 
 Renderer::Renderer() {
@@ -40,19 +42,19 @@ RendererError Renderer::GenerateVertexArrays(const float* vertices, const int nu
 
         // copy the index data into element buffer
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, num_indices, indices, GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, num_indices, indices, GL_STATIC_DRAW);
 
         // position
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, vertex_stride * sizeof(float), (void*) 0);
-        glEnableVertexAtribArray(0);
+        glEnableVertexAttribArray(0);
 
         // color
         glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, vertex_stride * sizeof(float), (void*) (3 * sizeof(float)));
-        glEnableVertexAtribArray(1);
+        glEnableVertexAttribArray(1);
 
         // texture
         glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, vertex_stride * sizeof(float), (void*) (6 * sizeof(float)));
-        glEnableVertexAtribArray(2);
+        glEnableVertexAttribArray(2);
 
         // unbind the buffers and arrays
         glBindBuffer(GL_ARRAY_BUFFER, 0);
