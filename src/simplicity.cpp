@@ -84,6 +84,7 @@ void Simplicity::Demo() {
                 // The other way to give entities behaviors is by callbacks
 
                 // render the world
+                renderer_.DrawWorld(world);
 
                 // process input
         }

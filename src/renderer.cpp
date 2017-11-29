@@ -112,8 +112,46 @@ RendererError Renderer::DrawObject() {
         // TODO
 }
 
-RendererError Renderer::DrawWorld() {
-        // TODO
+RendererError Renderer::DrawWorld(const World& world) {
+
+        // enable the shader
+        // TODO allow setting of different shaders
+        shader_.SetActive();
+
+        // set background color from the world object
+        glClearColor(world.background_color_.x,
+                     world.background_color_.y,
+                     world.background_color_.z,
+                     world.background_color_.w);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        // TODO pass in view params
+
+        // draw all entities
+        // TODO avoid excessive draw calls by filtering the entities we need to render
+        // NOTE this may cause problems with threading if someone else is acting on the world as it is rendered. We may need to iterate in a different way
+        for (auto it = world.entities_.begin(); it != world.entities_.end(); it ++) {
+                // redundant call?
+                shader_.SetActive();
+
+                // TODO set shader uniforms for view
+
+                // TODO load texture
+
+                // bind vertex buffers
+                glBindVertexArray(it->vertex_id_);
+
+                // render with vertex array or element buffer
+                if (it->use_element_buffer_) {
+                        glDrawElements(GL_TRIANGLES, it->num_points_, GL_UNSIGNED_INT, 0);
+                } else {
+                        glDrawArrays(GL_TRIANGLES, 0, it->num_points_);
+                }
+
+                // unbind
+                glDisable(GL_BLEND);
+                glBindTexture(GL_TEXTURE_2D, 0);
+        }
 }
 
 }  // namespace simplicity
