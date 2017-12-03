@@ -47,15 +47,25 @@ EngineError Simplicity::InitWindow(const int x, const int y, const std::string& 
         return EngineError::kSuccess;
 }
 
+EngineError Simplicity::ProcessUpdate() {
+
+        glfwMakeContextCurrent(window_);
+}
+
 /*
  * This serves as a functional demo of the features and is an example
  * workflow. As more features are added, they should also be added to
  * the demo in some way.
  */
 void Simplicity::Demo() {
-        // TODO
+        // TODO move this to main.cpp, since that is the demo binary
 
         InitWindow(100, 100, "Demo");
+
+        // set up the input handler
+        // the default input handler with GLFW *MUST* be initialized after
+        // InitWindow, because we need to give it the handle to the window
+        input_handler_.Initialize(window_);
 
         Shader shader;
         shader.Initialize("../shaders/basic.vs", "../shaders/basic.fs");
@@ -77,16 +87,20 @@ void Simplicity::Demo() {
         // Debug
         world.PrintWorld();
 
-        while (true) {
+        while (!glfwWindowShouldClose(window_)) {
                 // update the world
                 // note: in order to update any of the entity characteristics,
                 // we will have to hold on to the objects.
                 // The other way to give entities behaviors is by callbacks
 
+                glfwMakeContextCurrent(window_);
+
                 // render the world
-                renderer_.DrawWorld(world);
+                //renderer_.DrawWorld(world);
 
                 // process input
+                std::cout << "Processing input..." << std::endl;
+                input_handler_.ProcessInput();
         }
 }
 
