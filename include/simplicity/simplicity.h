@@ -16,9 +16,9 @@ public:
         Simplicity();
         ~Simplicity();
 
+        bool IsRunning();
         EngineError InitWindow(const int x, const int y, const std::string& label);
         EngineError ProcessUpdate();
-        void Demo();
 
         Renderer renderer_;
         InputHandler input_handler_;

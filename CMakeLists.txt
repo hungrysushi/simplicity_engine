@@ -30,6 +30,6 @@ add_subdirectory(test)
 
 # Test executable
 add_executable(simplicity_demo
-        main.cpp)
+        demo.cpp)
 target_link_libraries(simplicity_demo LINK_PUBLIC
         simplicity_engine)

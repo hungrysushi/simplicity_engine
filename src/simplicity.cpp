@@ -17,6 +17,12 @@ Simplicity::~Simplicity() {
 
 }
 
+bool Simplicity::IsRunning() {
+        // will need more complex logic later, maybe a member bool
+        // set by other functions
+        return !glfwWindowShouldClose(window_);
+}
+
 EngineError Simplicity::InitWindow(const int x, const int y, const std::string& label) {
 
         glfwInit();
@@ -50,58 +56,6 @@ EngineError Simplicity::InitWindow(const int x, const int y, const std::string& 
 EngineError Simplicity::ProcessUpdate() {
 
         glfwMakeContextCurrent(window_);
-}
-
-/*
- * This serves as a functional demo of the features and is an example
- * workflow. As more features are added, they should also be added to
- * the demo in some way.
- */
-void Simplicity::Demo() {
-        // TODO move this to main.cpp, since that is the demo binary
-
-        InitWindow(100, 100, "Demo");
-
-        // set up the input handler
-        // the default input handler with GLFW *MUST* be initialized after
-        // InitWindow, because we need to give it the handle to the window
-        input_handler_.Initialize(window_);
-
-        Shader shader;
-        shader.Initialize("../shaders/basic.vs", "../shaders/basic.fs");
-
-        renderer_.Initialize(shader);
-
-        // create the world
-        World world;
-
-        // create entities in shared pointers
-        // ex. RendererError renderer_err = renderer_.CreateRectangle(&entity);
-        Entity entity("demo entity");
-        RendererError renderer_err = renderer_.CreateRectangle(5.0, 5.0, 0.5, entity);
-
-        // add entities to the world
-        // ex. WorldError world_err = world_.AddEntity(entity);
-        WorldError world_err = world.AddEntity(entity);
-
-        // Debug
-        world.PrintWorld();
-
-        while (!glfwWindowShouldClose(window_)) {
-                // update the world
-                // note: in order to update any of the entity characteristics,
-                // we will have to hold on to the objects.
-                // The other way to give entities behaviors is by callbacks
-
-                glfwMakeContextCurrent(window_);
-
-                // render the world
-                //renderer_.DrawWorld(world);
-
-                // process input
-                std::cout << "Processing input..." << std::endl;
-                input_handler_.ProcessInput();
-        }
 }
 
 }  /* namespace simplicity */
