@@ -72,7 +72,7 @@ RendererError Renderer::GenerateVertexArrays(const float* vertices, const int nu
 
 RendererError Renderer::CreateRectangle(const float x, const float y, const float scale, Entity& entity) {
 
-        float x_norm, y_norm;
+        float x_norm = 0.0, y_norm = 0.0;
 
         // make the longer side 1.0
         if (x > y) {
@@ -100,8 +100,8 @@ RendererError Renderer::CreateRectangle(const float x, const float y, const floa
 
         // order in which to draw the points
         unsigned int indices[] = {
-                0, 1, 3,        // first triangle
-                1, 2, 3,        // second triangle
+                0, 1, 2,        // first triangle
+                1, 3, 2,        // second triangle
         };
 
         // generate and bind vertex object to entity
@@ -125,7 +125,8 @@ RendererError Renderer::DrawWorld(const World& world) {
                      world.background_color_.w);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // TODO pass in view params
+        // pass in view params
+        shader_.SetVec3("view_position", world.view_location_);
 
         // draw all entities
         // TODO avoid excessive draw calls by filtering the entities we need to render
@@ -134,7 +135,9 @@ RendererError Renderer::DrawWorld(const World& world) {
                 // redundant call?
                 shader_.SetActive();
 
-                // TODO set shader uniforms for view
+                // set shader uniforms for view
+                shader_.SetVec3("absolute_position", it->coords_);
+                shader_.SetVec2("window", {400, 400});  // TODO set this from the world
 
                 // TODO load texture
 

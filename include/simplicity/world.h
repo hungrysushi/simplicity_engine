@@ -22,7 +22,11 @@ public:
 
         Vec2 x_dimensions_;
         Vec2 y_dimensions_;
+
+        // There may be value in putting this in a camera class later
         Vec3 view_location_ = {0.0, 0.0, 0.0};
+        Vec2 view_window_ = {0.0, 0.0};
+
         Vec4 background_color_;
 
         // vector of entities

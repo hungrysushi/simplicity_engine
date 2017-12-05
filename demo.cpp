@@ -40,11 +40,12 @@ int main()
         // shared pointer to it
         // TODO
         simplicity::World world;
+        world.background_color_ = { 93.0 / 255, 148.0 / 255, 251.0 / 255 };
 
         // create entities
         // ex RendererError renderer_err = renderer_.CreateRectangle(&entity);
         simplicity::Entity entity("demo entity");
-        simplicity::RendererError renderer_err = engine.renderer_.CreateRectangle(5.0, 5.0, 0.5, entity);
+        simplicity::RendererError renderer_err = engine.renderer_.CreateRectangle(5.0, 5.0, 0.25, entity);
 
         // add entities to the world
         // ex WorldError world_err = world.AddEntity(entity);
@@ -61,7 +62,7 @@ int main()
                 // The other way to give entities behaviors is by callbacks
 
                 // render the world
-                //engine.renderer_.DrawWorld(world);
+                engine.renderer_.DrawWorld(world);
 
                 // process input
                 engine.input_handler_.ProcessInput();

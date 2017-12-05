@@ -29,9 +29,10 @@ void main()
         gl_Position = vec4(normal_position, 1.0f);
 
         // this is just for fun. Change the color with respect to time and position
-        new_color = color + vec3(sin(view_position.x/window.x),
-                                 sin(view_position.y/window.y),
-                                 sin(get_time));
+        /* new_color = color + vec3(sin(view_position.x/window.x), */
+        /*                          sin(view_position.y/window.y), */
+        /*                          sin(get_time)); */
+        new_color = color;
 
         // pass the texture coordinates to the fragment shader
         tex_coords = texture_coords;
