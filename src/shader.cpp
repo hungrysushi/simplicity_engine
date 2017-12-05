@@ -103,4 +103,16 @@ ShaderError Shader::SetActive() {
         return (glGetError() == GL_NO_ERROR) ? ShaderError::kSuccess : ShaderError::kShaderActiveError;
 }
 
+ShaderError Shader::SetVec2(const std::string& name, const Vec2& value) {
+        glUniform2f(glGetUniformLocation(shader_id_, name.c_str()), value.x, value.y);
+
+        return (glGetError() == GL_NO_ERROR) ? ShaderError::kSuccess : ShaderError::kSetUniformFailure;
+}
+
+ShaderError Shader::SetVec3(const std::string& name, const Vec3& value) {
+        glUniform3f(glGetUniformLocation(shader_id_, name.c_str()), value.x, value.y, value.z);
+
+        return (glGetError() == GL_NO_ERROR) ? ShaderError::kSuccess : ShaderError::kSetUniformFailure;
+}
+
 }  // namespace simplicity

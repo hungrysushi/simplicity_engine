@@ -9,6 +9,7 @@ enum class ShaderError {
         kFragmentCompileError,
         kProgramLinkError,
         kShaderActiveError,
+        kSetUniformFailure,
 };
 
 }  // namespace simplicity
