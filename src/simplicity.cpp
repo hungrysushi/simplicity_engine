@@ -53,6 +53,12 @@ EngineError Simplicity::InitWindow(const int x, const int y, const std::string& 
         return EngineError::kSuccess;
 }
 
+EngineError Simplicity::CloseWindow() {
+        glfwSetWindowShouldClose(window_, true);
+
+        return (glGetError() == GL_NO_ERROR) ? EngineError::kSuccess : EngineError::kWindowCloseError;
+}
+
 EngineError Simplicity::ProcessUpdate() {
 
         glfwMakeContextCurrent(window_);

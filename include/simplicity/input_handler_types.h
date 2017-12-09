@@ -1,5 +1,7 @@
 #pragma once
 
+#include <functional>
+
 namespace simplicity {
 
 enum class InputHandlerError {
@@ -10,7 +12,8 @@ enum class InputHandlerError {
 // using raw function pointers
 // this is probably dangerous. Must be a better way to do this
 // TODO figure out
-typedef void (*InputCallback)();
+/* typedef void (*InputCallback)(); */
+typedef std::function<void()> InputCallback;
 
 // pointer to the caller
 typedef void* Context;

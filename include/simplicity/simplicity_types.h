@@ -8,6 +8,7 @@ namespace simplicity {
 enum EngineError {
         kSuccess,
         kWindowCreateError,
+        kWindowCloseError,
         kGladError,
 };
         

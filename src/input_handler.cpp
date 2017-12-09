@@ -37,7 +37,7 @@ InputHandlerError InputHandler::ProcessInput() {
 
         if (glfwGetKey(window_, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
                 std::cout << "Escape key pressed. Exiting now." << std::endl;
-                glfwSetWindowShouldClose(window_, true);
+                /* glfwSetWindowShouldClose(window_, true); */
                 // TODO this should call some global event handler to handle this event
                 key_map_[Event::ESC_KEY_PRESS]();
         }

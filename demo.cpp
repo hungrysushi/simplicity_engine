@@ -29,8 +29,9 @@ int main()
         engine.input_handler_.Initialize(engine.window_);
         
         // register input and event callbacks
-        engine.input_handler_.RegisterInputEvent(simplicity::Event::ESC_KEY_PRESS, [](){
+        engine.input_handler_.RegisterInputEvent(simplicity::Event::ESC_KEY_PRESS, [&](){
                         std::cout << "Escape key pressed." << std::endl;
+                        engine.CloseWindow();
                         });
 
         // TODO this might be better wrapped inside a function in the engine

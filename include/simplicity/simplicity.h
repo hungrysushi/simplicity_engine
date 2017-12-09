@@ -18,6 +18,7 @@ public:
 
         bool IsRunning();
         EngineError InitWindow(const int x, const int y, const std::string& label);
+        EngineError CloseWindow();
         EngineError ProcessUpdate();
 
         Renderer renderer_;
