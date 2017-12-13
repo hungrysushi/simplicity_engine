@@ -49,6 +49,9 @@ which will provide more details about what exactly is failing.
 - Logging
 - Audio
 
+
+- Regarding the event callbacks, I went back and forth about making it generic so anyone can define events or having all events be enumerated in the event handler. For now, the second option seems better. Callbacks/event handling from outside should be designed outside.
+
 #### Stepping stones
 
 - Bring up a window

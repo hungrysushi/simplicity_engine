@@ -29,9 +29,21 @@ int main()
         engine.input_handler_.Initialize(engine.window_);
         
         // register input and event callbacks
-        engine.input_handler_.RegisterInputEvent(simplicity::Event::ESC_KEY_PRESS, [&](){
+        engine.input_handler_.RegisterInputEvent(simplicity::Event::kEscKeyPress, [&](){
                         std::cout << "Escape key pressed." << std::endl;
                         engine.CloseWindow();
+                        });
+        engine.input_handler_.RegisterInputEvent(simplicity::Event::kWKeyPress, [&](){
+                        std::cout << "W key pressed." << std::endl;
+                        });
+        engine.input_handler_.RegisterInputEvent(simplicity::Event::kAKeyPress, [&](){
+                        std::cout << "A key pressed." << std::endl;
+                        });
+        engine.input_handler_.RegisterInputEvent(simplicity::Event::kSKeyPress, [&](){
+                        std::cout << "S key pressed." << std::endl;
+                        });
+        engine.input_handler_.RegisterInputEvent(simplicity::Event::kDKeyPress, [&](){
+                        std::cout << "D key pressed." << std::endl;
                         });
 
         // TODO this might be better wrapped inside a function in the engine

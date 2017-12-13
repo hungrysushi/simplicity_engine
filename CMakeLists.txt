@@ -8,6 +8,7 @@ add_library(simplicity_engine
         src/simplicity.cpp
         # other engine sources should be added here
         src/entity.cpp
+        src/global_events.cpp
         src/input_handler.cpp
         src/renderer.cpp
         src/shader.cpp
