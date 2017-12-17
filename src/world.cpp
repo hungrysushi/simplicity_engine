@@ -27,6 +27,7 @@ WorldError World::AddEntity(const Entity& entity) {
 WorldError World::PrintWorld() {
         for (auto i = entities_.begin(); i != entities_.end(); i++) {
                 std::cout << (*i)->label_ << std::endl;
+                std::cout << "\tx:" << (*i)->coords_.x << " y:" << (*i)->coords_.y << std::endl;
         }
 
         return WorldError::kSuccess;

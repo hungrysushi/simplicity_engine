@@ -28,24 +28,6 @@ int main()
         // TODO consider moving this to InitWindow?
         engine.input_handler_.Initialize(engine.window_);
         
-        // register input and event callbacks
-        engine.input_handler_.RegisterInputEvent(simplicity::Event::kEscKeyPress, [&](){
-                        std::cout << "Escape key pressed." << std::endl;
-                        engine.CloseWindow();
-                        });
-        engine.input_handler_.RegisterInputEvent(simplicity::Event::kWKeyPress, [&](){
-                        std::cout << "W key pressed." << std::endl;
-                        });
-        engine.input_handler_.RegisterInputEvent(simplicity::Event::kAKeyPress, [&](){
-                        std::cout << "A key pressed." << std::endl;
-                        });
-        engine.input_handler_.RegisterInputEvent(simplicity::Event::kSKeyPress, [&](){
-                        std::cout << "S key pressed." << std::endl;
-                        });
-        engine.input_handler_.RegisterInputEvent(simplicity::Event::kDKeyPress, [&](){
-                        std::cout << "D key pressed." << std::endl;
-                        });
-
         // TODO this might be better wrapped inside a function in the engine
         // ie SetShader or something like that
         simplicity::Shader shader;
@@ -65,6 +47,28 @@ int main()
         simplicity::Entity entity("demo entity");
         simplicity::RendererError renderer_err = engine.renderer_.CreateRectangle(5.0, 5.0, 0.25, entity);
 
+        // register input and event callbacks
+        engine.input_handler_.RegisterInputEvent(simplicity::Event::kEscKeyPress, [&](){
+                        std::cout << "Escape key pressed." << std::endl;
+                        engine.CloseWindow();
+                        });
+        engine.input_handler_.RegisterInputEvent(simplicity::Event::kWKeyPress, [&](){
+                        std::cout << "W key pressed." << std::endl;
+                        entity.coords_.y++;
+                        });
+        engine.input_handler_.RegisterInputEvent(simplicity::Event::kAKeyPress, [&](){
+                        std::cout << "A key pressed." << std::endl;
+                        entity.coords_.x--;
+                        });
+        engine.input_handler_.RegisterInputEvent(simplicity::Event::kSKeyPress, [&](){
+                        std::cout << "S key pressed." << std::endl;
+                        entity.coords_.y--;
+                        });
+        engine.input_handler_.RegisterInputEvent(simplicity::Event::kDKeyPress, [&](){
+                        std::cout << "D key pressed." << std::endl;
+                        entity.coords_.x++;
+                        });
+
         // add entities to the world
         // ex WorldError world_err = world.AddEntity(entity);
         simplicity::WorldError world_err = world.AddEntity(entity);
@@ -80,6 +84,7 @@ int main()
                 // The other way to give entities behaviors is by callbacks
 
                 // render the world
+        world.PrintWorld();
                 engine.renderer_.DrawWorld(world);
 
                 // process input
