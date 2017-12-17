@@ -37,20 +37,22 @@ which will provide more details about what exactly is failing.
   - ~~cmake files~~
 - ~~Integrate gtest~~
 - Renderer
-  - Set up GLFW and GLAD
-  - Basic shaders
+  - ~~Set up GLFW and GLAD~~
+  - ~~Basic shaders~~
   - Basic methods to draw triangles and rectangles
-- Input
-  - Callbacks
+- ~~Input~~
+  - ~~Callbacks~~
 - World representation
-  - Entities
+  - ~~Entities~~
   - Behaviors
 - Load levels from file
 - Logging
 - Audio
 
 
-- Regarding the event callbacks, I went back and forth about making it generic so anyone can define events or having all events be enumerated in the event handler. For now, the second option seems better. Callbacks/event handling from outside should be designed outside.
+Regarding the event callbacks, I went back and forth about making it generic so anyone can define events or having all events be enumerated in the event handler. For now, the second option seems better. Callbacks/event handling from outside should be designed outside.
+
+Asset and memory management should happen in a separate component. Raw pointers can be passed around, but their entire lifecycle should be managed from this component.
 
 #### Stepping stones
 
