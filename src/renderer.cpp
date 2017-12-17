@@ -132,23 +132,27 @@ RendererError Renderer::DrawWorld(const World& world) {
         // TODO avoid excessive draw calls by filtering the entities we need to render
         // NOTE this may cause problems with threading if someone else is acting on the world as it is rendered. We may need to iterate in a different way
         for (auto it = world.entities_.begin(); it != world.entities_.end(); it ++) {
+
+                // dereference entitity
+                Entity *entity = (Entity*) *it;
+
                 // redundant call?
                 shader_.SetActive();
 
                 // set shader uniforms for view
-                shader_.SetVec3("absolute_position", it->coords_);
+                shader_.SetVec3("absolute_position", entity->coords_);
                 shader_.SetVec2("window", {400, 400});  // TODO set this from the world
 
                 // TODO load texture
 
                 // bind vertex buffers
-                glBindVertexArray(it->vertex_id_);
+                glBindVertexArray(entity->vertex_id_);
 
                 // render with vertex array or element buffer
-                if (it->use_element_buffer_) {
-                        glDrawElements(GL_TRIANGLES, it->num_points_, GL_UNSIGNED_INT, 0);
+                if (entity->use_element_buffer_) {
+                        glDrawElements(GL_TRIANGLES, entity->num_points_, GL_UNSIGNED_INT, 0);
                 } else {
-                        glDrawArrays(GL_TRIANGLES, 0, it->num_points_);
+                        glDrawArrays(GL_TRIANGLES, 0, entity->num_points_);
                 }
 
                 // unbind

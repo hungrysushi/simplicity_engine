@@ -30,7 +30,7 @@ public:
         Vec4 background_color_;
 
         // vector of entities
-        std::vector<Entity> entities_;
+        std::vector<const Entity*> entities_;
 };
 
 }  // namespace simplicity
