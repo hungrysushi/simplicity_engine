@@ -2,8 +2,10 @@
 #define SHADER_DIR "../shaders/"
 
 #include <iostream>
+#include <string>
 
 #include "simplicity/entity.h"
+#include "simplicity/entity_types.h"
 #include "simplicity/renderer_types.h"
 #include "simplicity/shader.h"
 #include "simplicity/simplicity.h"
@@ -45,7 +47,16 @@ int main()
         // create entities
         // ex RendererError renderer_err = renderer_.CreateRectangle(&entity);
         simplicity::Entity entity("demo entity");
-        simplicity::RendererError renderer_err = engine.renderer_.CreateRectangle(5.0, 5.0, 0.25, entity);
+        simplicity::RendererError renderer_err = engine.renderer_.CreateRectangle(5.0, 5.0, 0.05, entity);
+
+        // blocks for the floor
+        for (int i = 0; i < 10; i++) {
+                simplicity::Entity floor("floor" + std::to_string(i), simplicity::EntityType::kFloor);
+                engine.renderer_.CreateRectangle(5.0, 5.0, 0.05, floor);
+                floor.coords_.x = i * 10;
+
+                world.AddEntity(floor);
+        }
 
         // register input and event callbacks
         engine.input_handler_.RegisterInputEvent(simplicity::Event::kEscKeyPress, [&](){
@@ -59,6 +70,7 @@ int main()
         engine.input_handler_.RegisterInputEvent(simplicity::Event::kAKeyPress, [&](){
                         std::cout << "A key pressed." << std::endl;
                         entity.coords_.x--;
+                        world.view_location_.x--;
                         });
         engine.input_handler_.RegisterInputEvent(simplicity::Event::kSKeyPress, [&](){
                         std::cout << "S key pressed." << std::endl;
@@ -67,6 +79,7 @@ int main()
         engine.input_handler_.RegisterInputEvent(simplicity::Event::kDKeyPress, [&](){
                         std::cout << "D key pressed." << std::endl;
                         entity.coords_.x++;
+                        world.view_location_.x++;
                         });
 
         // add entities to the world
@@ -84,7 +97,6 @@ int main()
                 // The other way to give entities behaviors is by callbacks
 
                 // render the world
-        world.PrintWorld();
                 engine.renderer_.DrawWorld(world);
 
                 // process input
