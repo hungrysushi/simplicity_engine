@@ -1,11 +1,6 @@
 
 project(unit_tests)
 
-# make the googletest modules available
-add_subdirectory(lib/googletest)
-include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
-include_directories(${gmock_SOURCE_DIR}/include ${gmock_SOURCE_DIR})
-
 add_executable(testengine
         test_main.cpp
         # include test files here

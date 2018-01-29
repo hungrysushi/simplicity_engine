@@ -23,7 +23,7 @@ target_link_libraries(simplicity_engine LINK_PUBLIC
         glad)
 
 # 3rd party modules
-add_subdirectory(3rd_party)
+add_subdirectory(modules)
 
 # Unit tests
 enable_testing()
