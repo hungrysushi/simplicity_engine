@@ -1,8 +1,8 @@
-[submodule "3rd_party/glad"]
-	path = 3rd_party/glad
+[submodule "modules/glad"]
+	path = modules/glad
 	url = https://github.com/Dav1dde/glad.git
-[submodule "3rd_party/glfw"]
-	path = 3rd_party/glfw
+[submodule "modules/glfw"]
+	path = modules/glfw
 	url = https://github.com/glfw/glfw.git
 [submodule "test/lib/googletest"]
 	path = test/lib/googletest
