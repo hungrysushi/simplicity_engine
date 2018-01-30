@@ -50,12 +50,14 @@ int main()
         simplicity::RendererError renderer_err = engine.renderer_.CreateRectangle(5.0, 5.0, 0.05, entity);
 
         // blocks for the floor
-        for (int i = 0; i < 10; i++) {
-                simplicity::Entity floor("floor" + std::to_string(i), simplicity::EntityType::kFloor);
-                engine.renderer_.CreateRectangle(5.0, 5.0, 0.05, floor);
-                floor.coords_.x = i * 10;
+        simplicity::Entity* floor[10];
 
-                world.AddEntity(floor);
+        for (int i = 0; i < 10; i++) {
+                floor[i] = new simplicity::Entity("floor" + std::to_string(i), simplicity::EntityType::kFloor);
+                engine.renderer_.CreateRectangle(5.0, 5.0, 0.05, *floor[i]);
+                floor[i]->coords_.x = i * 10;
+
+                world.AddEntity(*floor[i]);
         }
 
         // register input and event callbacks
