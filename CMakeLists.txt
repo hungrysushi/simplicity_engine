@@ -11,6 +11,7 @@ add_library(simplicity_engine
         src/global_events.cpp
         src/input_handler.cpp
         src/renderer.cpp
+        src/resource_manager.cpp
         src/shader.cpp
         src/world.cpp
         )
@@ -20,7 +21,9 @@ target_include_directories (simplicity_engine PUBLIC
 
 target_link_libraries(simplicity_engine LINK_PUBLIC
         glfw ${GLFW_LIBRARIES}
-        glad)
+        glad
+        memory_pool
+        )
 
 # 3rd party modules
 add_subdirectory(modules)
