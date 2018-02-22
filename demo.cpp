@@ -1,3 +1,8 @@
+/*
+ * This serves as a functional demo of the features and is an example
+ * workflow. As more features are added, they should also be added to
+ * the demo in some way.
+ */
 
 #define SHADER_DIR "../shaders/"
 
@@ -12,15 +17,13 @@
 #include "simplicity/world.h"
 #include "simplicity/world_types.h"
 
-/*
- * This serves as a functional demo of the features and is an example
- * workflow. As more features are added, they should also be added to
- * the demo in some way.
- */
+void CreateFloorBlocks();
+
+simplicity::Simplicity engine;
+simplicity::World world;
+
 int main()
 {
-        simplicity::Simplicity engine;
-
         //engine.Demo();
         engine.InitWindow(500, 500, "Demo");
 
@@ -41,24 +44,12 @@ int main()
         // go ahead and do it when initializing the engine, and then grab a
         // shared pointer to it
         // TODO
-        simplicity::World world;
         world.background_color_ = { 93.0 / 255, 148.0 / 255, 251.0 / 255 };
 
         // create entities
         // ex RendererError renderer_err = renderer_.CreateRectangle(&entity);
         simplicity::Entity entity("demo entity");
         simplicity::RendererError renderer_err = engine.renderer_.CreateRectangle(5.0, 5.0, 0.05, entity);
-
-        // blocks for the floor
-        simplicity::Entity* floor[10];
-
-        for (int i = 0; i < 10; i++) {
-                floor[i] = new simplicity::Entity("floor" + std::to_string(i), simplicity::EntityType::kFloor);
-                engine.renderer_.CreateRectangle(5.0, 5.0, 0.05, *floor[i]);
-                floor[i]->coords_.x = i * 10;
-
-                world.AddEntity(*floor[i]);
-        }
 
         // register input and event callbacks
         engine.input_handler_.RegisterInputEvent(simplicity::Event::kEscKeyPress, [&](){
@@ -88,6 +79,8 @@ int main()
         // ex WorldError world_err = world.AddEntity(entity);
         simplicity::WorldError world_err = world.AddEntity(entity);
 
+        CreateFloorBlocks();
+
         // Debug
         world.PrintWorld();
 
@@ -106,4 +99,17 @@ int main()
         }
 
         return 0;
+}
+
+void CreateFloorBlocks() {
+        // blocks for the floor
+        simplicity::Entity *floor[10];
+
+        for (int i = 0; i < 10; i++) {
+                floor[i] = new simplicity::Entity("floor" + std::to_string(i), simplicity::EntityType::kFloor);
+                engine.renderer_.CreateRectangle(5.0, 5.0, 0.05, *floor[i]);
+                floor[i]->coords_.x = i * 10;
+
+                world.AddEntity(*floor[i]);
+        }
 }
