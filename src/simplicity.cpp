@@ -27,9 +27,10 @@ EngineError Simplicity::Initialize(const std::string& label) {
 
         glfwInit();
 
-        // TODO get the window resolution
+        // get the window resolution
+        const GLFWvidmode *mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
-        InitWindow(400, 400, label);
+        InitWindow(mode->width, mode->height, label);
 
         // set up the default input handler
         input_handler_.Initialize(window_);
@@ -40,6 +41,7 @@ EngineError Simplicity::Initialize(const std::string& label) {
 
         // TODO initialize this without shader, set shader later
         renderer_.Initialize(shader);
+        renderer_.SetWindowDimensions(mode->width, mode->height);
 
         // TODO actually check errors
         return EngineError::kSuccess;

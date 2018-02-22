@@ -18,8 +18,10 @@ public:
         RendererError CreateRectangle(const float x, const float y, const float scale, Entity& entity);
         RendererError DrawObject();
         RendererError DrawWorld(const World& world);
+        RendererError SetWindowDimensions(const int x, const int y);
 
         Shader shader_;
+        Vec2 window_dimensions_;
 };
 
 }  // namespace simplicity

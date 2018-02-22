@@ -141,7 +141,7 @@ RendererError Renderer::DrawWorld(const World& world) {
 
                 // set shader uniforms for view
                 shader_.SetVec3("absolute_position", entity->coords_);
-                shader_.SetVec2("window", {400, 400});  // TODO set this from the world
+                shader_.SetVec2("window", {window_dimensions_.x, window_dimensions_.y});  // this will let us calculate proportions properly 
 
                 // TODO load texture
 
@@ -159,6 +159,10 @@ RendererError Renderer::DrawWorld(const World& world) {
                 glDisable(GL_BLEND);
                 glBindTexture(GL_TEXTURE_2D, 0);
         }
+}
+
+RendererError Renderer::SetWindowDimensions(const int x, const int y) {
+        window_dimensions_ = {(float) x, (float) y};
 }
 
 }  // namespace simplicity
