@@ -12,6 +12,7 @@
 #include "simplicity/entity.h"
 #include "simplicity/entity_types.h"
 #include "simplicity/renderer_types.h"
+#include "simplicity/resource_manager.h"
 #include "simplicity/shader.h"
 #include "simplicity/simplicity.h"
 #include "simplicity/world.h"
@@ -21,6 +22,7 @@ void CreateFloorBlocks();
 
 simplicity::Simplicity engine;
 simplicity::World world;
+simplicity::ResourceManager resource_manager;
 
 int main()
 {
@@ -103,13 +105,14 @@ int main()
 
 void CreateFloorBlocks() {
         // blocks for the floor
-        simplicity::Entity *floor[10];
+        simplicity::Entity *floor;
 
         for (int i = 0; i < 10; i++) {
-                floor[i] = new simplicity::Entity("floor" + std::to_string(i), simplicity::EntityType::kFloor);
-                engine.renderer_.CreateRectangle(5.0, 5.0, 0.05, *floor[i]);
-                floor[i]->coords_.x = i * 10;
+                // just create these on the heap for now
+                resource_manager.Allocate((void*&) floor, sizeof(simplicity::Entity));
+                engine.renderer_.CreateRectangle(5.0, 5.0, 0.05, *floor);
+                floor->coords_.x = i * 10;
 
-                world.AddEntity(*floor[i]);
+                world.AddEntity(*floor);
         }
 }
