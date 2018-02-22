@@ -26,20 +26,19 @@ simplicity::ResourceManager resource_manager;
 
 int main()
 {
-        //engine.Demo();
-        engine.InitWindow(500, 500, "Demo");
+        engine.Initialize("Demo");
 
         // set up the input handler
         // the default input handler with GLFW *must* be initialized after
         // InitWindow, because we need to give it the handle to the window
         // TODO consider moving this to InitWindow?
-        engine.input_handler_.Initialize(engine.window_);
+        /* engine.input_handler_.Initialize(engine.window_); */
         
         // TODO this might be better wrapped inside a function in the engine
         // ie SetShader or something like that
-        simplicity::Shader shader;
-        shader.Initialize("../shaders/basic.vs", "../shaders/basic.fs");
-        engine.renderer_.Initialize(shader);
+        /* simplicity::Shader shader; */
+        /* shader.Initialize("../shaders/basic.vs", "../shaders/basic.fs"); */
+        /* engine.renderer_.Initialize(shader); */
 
         // create the world
         // again, maybe something better wrapped in an engine function, or just

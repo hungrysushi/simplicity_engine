@@ -23,9 +23,29 @@ bool Simplicity::IsRunning() {
         return !glfwWindowShouldClose(window_);
 }
 
-EngineError Simplicity::InitWindow(const int x, const int y, const std::string& label) {
+EngineError Simplicity::Initialize(const std::string& label) {
 
         glfwInit();
+
+        // TODO get the window resolution
+
+        InitWindow(400, 400, label);
+
+        // set up the default input handler
+        input_handler_.Initialize(window_);
+
+        // set up a default shader
+        Shader shader;
+        shader.Initialize("../shaders/basic.vs", "../shaders/basic.fs");
+
+        // TODO initialize this without shader, set shader later
+        renderer_.Initialize(shader);
+
+        // TODO actually check errors
+        return EngineError::kSuccess;
+}
+
+EngineError Simplicity::InitWindow(const int x, const int y, const std::string& label) {
 
         // set opengl version, and use core opengl for greater compatibility
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
