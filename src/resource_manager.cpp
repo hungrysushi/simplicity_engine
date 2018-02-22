@@ -9,8 +9,16 @@ ResourceManager::ResourceManager() {
 }
 
 ResourceManager::~ResourceManager() {
-        // TODO
         // clean up all allocated resources and free them
+        for (auto it = resources_.begin(); it != resources_.end(); it++) {
+                if (it->deallocate == nullptr) {
+                        delete (uint8_t*) it->buffer;
+                } else {
+                        it->deallocate();
+                }
+        }
+
+        // everything else should be cleared up automatically
 }
 
 ResourceError ResourceManager::Allocate(VoidPtr& target, const uint32_t size, const bool use_pool) {
