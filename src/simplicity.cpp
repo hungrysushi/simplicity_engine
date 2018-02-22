@@ -55,7 +55,7 @@ EngineError Simplicity::InitWindow(const int x, const int y, const std::string& 
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
         // create the window and save a handle
-        window_ = glfwCreateWindow(x, y, label.c_str(), NULL, NULL);
+        window_ = glfwCreateWindow(x, y, label.c_str(), glfwGetPrimaryMonitor(), NULL);
 
         if (window_ == NULL) {
                 std::cout << "Failed to open window" << std::endl;
