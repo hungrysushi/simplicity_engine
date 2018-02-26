@@ -22,6 +22,7 @@ public:
 
         Shader shader_;
         Vec2 window_dimensions_;
+        Vec2 window_proportions_;
 };
 
 }  // namespace simplicity

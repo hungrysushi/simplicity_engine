@@ -19,4 +19,10 @@ Entity::~Entity() {
 
 }
 
+void Entity::Initialize() {
+        label_ = "";
+        type_ = EntityType::kOther;
+        coords_ = {0, 0, 0};
+}
+
 }  // namespace simplicity

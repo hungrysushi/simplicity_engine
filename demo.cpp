@@ -83,7 +83,7 @@ int main()
         CreateFloorBlocks();
 
         // Debug
-        world.PrintWorld();
+        /* world.PrintWorld(); */
 
         // main loop
         while (engine.IsRunning()) {

@@ -50,8 +50,8 @@ EngineError Simplicity::Initialize(const std::string& label) {
 EngineError Simplicity::InitWindow(const int x, const int y, const std::string& label) {
 
         // set opengl version, and use core opengl for greater compatibility
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
         // create the window and save a handle

@@ -1,6 +1,8 @@
 
 #include "simplicity/renderer.h"
 
+#include <iostream>
+
 #include "glad/glad.h"
 
 namespace simplicity {
@@ -92,10 +94,10 @@ RendererError Renderer::CreateRectangle(const float x, const float y, const floa
         // TODO make the color configurable
         float vertices[] = {
                 // position             // color                // texture
-                x_pos, y_pos, 0.0f,     1.0f, 0.0f, 0.0f,       1.0f, 1.0f,
-                x_pos, -y_pos, 0.0f,    0.0f, 1.0f, 0.0f,       1.0f, 0.0f,
-                -x_pos, y_pos, 0.0f,    0.0f, 0.0f, 1.0f,       0.0f, 0.0f,
-                -x_pos, -y_pos, 0.0f,   1.0f, 1.0f, 0.0f,       0.0f, 1.0f,
+                x_pos * window_proportions_.x, y_pos * window_proportions_.y, 0.0f,     1.0f, 0.0f, 0.0f,       1.0f, 1.0f,
+                x_pos * window_proportions_.x, -y_pos * window_proportions_.y, 0.0f,    0.0f, 1.0f, 0.0f,       1.0f, 0.0f,
+                -x_pos * window_proportions_.x, y_pos * window_proportions_.y, 0.0f,    0.0f, 0.0f, 1.0f,       0.0f, 0.0f,
+                -x_pos * window_proportions_.x, -y_pos * window_proportions_.y, 0.0f,   1.0f, 1.0f, 0.0f,       0.0f, 1.0f,
         };
 
         // order in which to draw the points
@@ -162,6 +164,14 @@ RendererError Renderer::DrawWorld(const World& world) {
 }
 
 RendererError Renderer::SetWindowDimensions(const int x, const int y) {
+
+        // we want to set the ratio based on the longest side
+        if (x > y) {  // majority of cases
+                window_proportions_ = {(float) y / x, 1.0 };  // scale x down
+        }  else {
+                window_proportions_ = {1.0, (float) x / y };
+        }
+
         window_dimensions_ = {(float) x, (float) y};
 }
 

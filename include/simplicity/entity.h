@@ -13,6 +13,8 @@ public:
         Entity(const std::string& label, const EntityType type);
         ~Entity();
 
+        void Initialize();
+
         std::string label_;
         EntityType type_;
         Vec3 coords_;
