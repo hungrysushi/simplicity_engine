@@ -7,3 +7,9 @@
 [submodule "modules/googletest"]
 	path = modules/googletest
 	url = https://github.com/google/googletest.git
+[submodule "memory_pool"]
+	path = memory_pool
+	url = https://github.com/hungrysushi/memory_pool.git
+[submodule "modules/memory_pool"]
+	path = modules/memory_pool
+	url = https://github.com/hungrysushi/memory_pool.git
