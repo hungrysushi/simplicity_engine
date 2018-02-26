@@ -51,6 +51,7 @@ int main()
         // ex RendererError renderer_err = renderer_.CreateRectangle(&entity);
         simplicity::Entity entity("demo entity");
         simplicity::RendererError renderer_err = engine.renderer_.CreateRectangle(5.0, 5.0, 0.05, entity);
+        entity.coords_.y = 250.0;
 
         // register input and event callbacks
         engine.input_handler_.RegisterInputEvent(simplicity::Event::kEscKeyPress, [&](){
@@ -106,11 +107,17 @@ void CreateFloorBlocks() {
         // blocks for the floor
         simplicity::Entity *floor;
 
-        for (int i = 0; i < 10; i++) {
+        float scaling_factor = 0.05;
+
+        // this should be done based on the shortest side, since the scaling factor is a fraction of the shorter side
+        int block_width = 2 * engine.renderer_.window_dimensions_.y * scaling_factor;
+
+        for (int i = 0; i < 8; i++) {
                 // just create these on the heap for now
                 resource_manager.Allocate((void*&) floor, sizeof(simplicity::Entity));
-                engine.renderer_.CreateRectangle(5.0, 5.0, 0.05, *floor);
-                floor->coords_.x = i * 10;
+                engine.renderer_.CreateRectangle(1.0, 1.0, scaling_factor, *floor);
+                floor->coords_.x = i * block_width;
+                floor->type_ = simplicity::EntityType::kFloor;
 
                 world.AddEntity(*floor);
         }
