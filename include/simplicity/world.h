@@ -4,6 +4,7 @@
  */
 #pragma once
 
+#include <map>
 #include <vector>
 
 #include "simplicity/common_types.h"
@@ -19,6 +20,9 @@ public:
         WorldError Initialize();
         WorldError AddEntity(const Entity& entity);
         WorldError PrintWorld();
+        WorldError UpdateWorld();
+        WorldError CreateBehavior(const uint32_t& id, const std::function<void(Entity* entity)>& behavior);
+        WorldError RegisterBehavior(const uint32_t& id, Entity* entity);
 
         Vec2 x_dimensions_;
         Vec2 y_dimensions_;
@@ -31,6 +35,7 @@ public:
 
         // vector of entities
         std::vector<const Entity*> entities_;
+        std::map<uint32_t, Behavior> behavior_map_;
 };
 
 }  // namespace simplicity

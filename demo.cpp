@@ -19,6 +19,7 @@
 #include "simplicity/world_types.h"
 
 void CreateFloorBlocks();
+void SetUpEvents(simplicity::Entity& entity);
 
 simplicity::Simplicity engine;
 simplicity::World world;
@@ -46,6 +47,8 @@ int main()
         // shared pointer to it
         // TODO
         world.background_color_ = { 93.0 / 255, 148.0 / 255, 251.0 / 255 };
+
+        CreateFloorBlocks();
 
         // create entities
         // ex RendererError renderer_err = renderer_.CreateRectangle(&entity);
@@ -81,7 +84,8 @@ int main()
         // ex WorldError world_err = world.AddEntity(entity);
         simplicity::WorldError world_err = world.AddEntity(entity);
 
-        CreateFloorBlocks();
+        // set up common update events
+        SetUpEvents(entity);
 
         // Debug
         /* world.PrintWorld(); */
@@ -98,6 +102,8 @@ int main()
 
                 // process input
                 engine.input_handler_.ProcessInput();
+
+                world.UpdateWorld();
         }
 
         return 0;
@@ -121,4 +127,13 @@ void CreateFloorBlocks() {
 
                 world.AddEntity(*floor);
         }
+}
+
+void SetUpEvents(simplicity::Entity &entity) {
+        // function for "gravity"
+        world.CreateBehavior(0, [](simplicity::Entity* entity) {
+                entity->coords_.y--;
+                        });
+
+        world.RegisterBehavior(0, &entity);
 }
