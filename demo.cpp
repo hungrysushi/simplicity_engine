@@ -63,21 +63,21 @@ int main()
                         });
         engine.input_handler_.RegisterInputEvent(simplicity::Event::kWKeyPress, [&](){
                         std::cout << "W key pressed." << std::endl;
-                        entity.coords_.y++;
+                        entity.coords_.y += 13;
                         });
         engine.input_handler_.RegisterInputEvent(simplicity::Event::kAKeyPress, [&](){
                         std::cout << "A key pressed." << std::endl;
-                        entity.coords_.x--;
-                        world.view_location_.x--;
+                        entity.coords_.x -= 10;
+                        world.view_location_.x -= 10;
                         });
         engine.input_handler_.RegisterInputEvent(simplicity::Event::kSKeyPress, [&](){
                         std::cout << "S key pressed." << std::endl;
-                        entity.coords_.y--;
+                        entity.coords_.y -= 10;
                         });
         engine.input_handler_.RegisterInputEvent(simplicity::Event::kDKeyPress, [&](){
                         std::cout << "D key pressed." << std::endl;
-                        entity.coords_.x++;
-                        world.view_location_.x++;
+                        entity.coords_.x += 10;
+                        world.view_location_.x += 10;
                         });
 
         // add entities to the world
@@ -132,8 +132,10 @@ void CreateFloorBlocks() {
 void SetUpEvents(simplicity::Entity &entity) {
         // function for "gravity"
         world.CreateBehavior(0, [](simplicity::Entity* entity) {
-                entity->coords_.y--;
-                        });
+                // TODO determine "floor" by checking blocks
+                if (entity->coords_.y > 0)
+                        entity->coords_.y -= 3;
+                });
 
         world.RegisterBehavior(0, &entity);
 }
