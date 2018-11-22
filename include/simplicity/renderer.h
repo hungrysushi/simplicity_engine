@@ -1,8 +1,8 @@
 #pragma once
 
 #include "simplicity/entity.h"
-#include "simplicity/renderer_types.h"
 #include "simplicity/shader.h"
+#include "simplicity/types/renderer_types.h"
 #include "simplicity/world.h"
 
 namespace simplicity {

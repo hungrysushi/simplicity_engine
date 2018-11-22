@@ -2,8 +2,8 @@
 
 #include <string>
 
-#include "simplicity/common_types.h"
-#include "simplicity/entity_types.h"
+#include "simplicity/types/common_types.h"
+#include "simplicity/types/entity_types.h"
 
 namespace simplicity {
 

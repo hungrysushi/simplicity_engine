@@ -4,8 +4,8 @@
 
 #include "GLFW/glfw3.h"
 
-#include "simplicity/input_handler_types.h"
-#include "simplicity/global_events_types.h"
+#include "simplicity/types/input_handler_types.h"
+#include "simplicity/types/global_events_types.h"
 
 namespace simplicity {
 

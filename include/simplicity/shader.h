@@ -2,8 +2,8 @@
 
 #include <string>
 
-#include "simplicity/common_types.h"
-#include "simplicity/shader_types.h"
+#include "simplicity/types/common_types.h"
+#include "simplicity/types/shader_types.h"
 
 namespace simplicity {
 

@@ -2,7 +2,7 @@
 
 #include <map>
 
-#include "simplicity/global_events_types.h"
+#include "simplicity/types/global_events_types.h"
 
 namespace simplicity {
 

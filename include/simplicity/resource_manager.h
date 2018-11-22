@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "memory_pool.h"
-#include "simplicity/resource_types.h"
+#include "simplicity/types/resource_types.h"
 
 namespace simplicity {
 

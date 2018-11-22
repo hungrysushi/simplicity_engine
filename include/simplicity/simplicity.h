@@ -7,7 +7,7 @@
 
 #include "simplicity/input_handler.h"
 #include "simplicity/renderer.h"
-#include "simplicity/simplicity_types.h"
+#include "simplicity/types/simplicity_types.h"
 
 namespace simplicity {
 

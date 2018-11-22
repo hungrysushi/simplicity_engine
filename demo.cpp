@@ -10,13 +10,13 @@
 #include <string>
 
 #include "simplicity/entity.h"
-#include "simplicity/entity_types.h"
-#include "simplicity/renderer_types.h"
 #include "simplicity/resource_manager.h"
 #include "simplicity/shader.h"
 #include "simplicity/simplicity.h"
+#include "simplicity/types/entity_types.h"
+#include "simplicity/types/renderer_types.h"
+#include "simplicity/types/world_types.h"
 #include "simplicity/world.h"
-#include "simplicity/world_types.h"
 
 void CreateFloorBlocks();
 void SetUpEvents(simplicity::Entity& entity);
