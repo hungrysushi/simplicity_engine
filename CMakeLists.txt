@@ -23,7 +23,10 @@ target_link_libraries(simplicity_engine LINK_PUBLIC
         glad
         glfw ${GLFW_LIBRARIES}
         memory_pool
+        newton
         )
+
+add_subdirectory(newton)
 
 # 3rd party modules
 add_subdirectory(modules)
