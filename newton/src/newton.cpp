@@ -6,7 +6,7 @@ Classical::Classical() {
         // nothing to do yet
 }
 
-Classica::~Classical() {
+Classical::~Classical() {
         // nothing to do yet
 }
 
