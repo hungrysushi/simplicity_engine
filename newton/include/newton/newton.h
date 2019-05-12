@@ -1,12 +1,16 @@
+#pragma once
 
-namespace newton {
+#include <vector>
 
-class Classical {
+namespace simplicity {
+
+class Newton {
 public:
-        Classical();
-        ~Classical();
+        Newton();
+        ~Newton();
+        SimpleDetectCollision(vector<vector<int>> a, vector<vector<int>> b)
 
 private:
 };
 
-} /* namespace newton */
+} /* namespace simplicity */

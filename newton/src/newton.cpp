@@ -1,13 +1,17 @@
 #include "newton/newton.h"
 
-namespace newton {
+namespace simplicity {
 
-Classical::Classical() {
+Newton::Newton() {
         // nothing to do yet
 }
 
-Classical::~Classical() {
+Newton::~Newton() {
         // nothing to do yet
 }
 
-} /* namespace newton */
+Newton::SimpleDetectCollision(vector<vector<int>> a, vector<vector<int>> b) {
+    
+}
+
+} /* namespace simplicity */
