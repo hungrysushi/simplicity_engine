@@ -45,6 +45,10 @@ EngineError Simplicity::Initialize(const std::string& label) {
         /* renderer_.SetWindowDimensions(mode->width, mode->height); */
         renderer_.SetWindowDimensions(400, 600);
 
+        // start the timer
+        start_time_ = std::chrono::system_clock::now();
+        prev_time_ = start_time_;
+
         // TODO actually check errors
         return EngineError::kSuccess;
 }
@@ -87,8 +91,13 @@ EngineError Simplicity::CloseWindow() {
 }
 
 EngineError Simplicity::ProcessUpdate() {
+        std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
+
+        frame_elapsed_ns_ = now - prev_time_;
 
         glfwMakeContextCurrent(window_);
+
+        prev_time_ = now;
 }
 
 // callback that gets invoked on every window size change

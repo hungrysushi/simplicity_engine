@@ -24,6 +24,7 @@ void SetUpEvents(simplicity::Entity& entity);
 simplicity::Simplicity engine;
 simplicity::World world;
 simplicity::ResourceManager resource_manager;
+uint64_t frames = 0;
 
 int main()
 {
@@ -97,6 +98,9 @@ int main()
                 // note: in order to update any of the entity characteristics,
                 // we will have to hold on to the objects.
                 // The other way to give entities behaviors is by callbacks
+
+                engine.ProcessUpdate();
+                std::cout << "Frame: " << frames++ << ", Elapsed time: " << engine.frame_elapsed_ns_.count() << std::endl;
 
                 // render the world
                 engine.renderer_.DrawWorld(world);

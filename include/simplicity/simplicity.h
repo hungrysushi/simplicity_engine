@@ -1,5 +1,6 @@
 #pragma once
 
+#include <chrono>
 #include <string>
 
 #include "glad/glad.h"
@@ -27,6 +28,11 @@ public:
         Renderer renderer_;
         InputHandler input_handler_;
         GLFWwindow* window_ = nullptr;
+
+        std::chrono::time_point<std::chrono::system_clock> start_time_;
+        std::chrono::time_point<std::chrono::system_clock> prev_time_;
+        std::chrono::duration<double, std::milli> frame_elapsed_ns_;
+
 };
 
 }  /* namespace simplicity */
