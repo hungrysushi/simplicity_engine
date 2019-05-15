@@ -64,6 +64,8 @@ EngineError Simplicity::InitWindow(const int x, const int y, const std::string& 
         }
 
         glfwMakeContextCurrent(window_);
+        glfwSetWindowUserPointer(window_, this);
+        glfwSetFramebufferSizeCallback(window_, FramebufferSizeCallback);
 
         if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
                 std::cout << "Could not initialize GLAD" << std::endl;
@@ -84,6 +86,17 @@ EngineError Simplicity::CloseWindow() {
 EngineError Simplicity::ProcessUpdate() {
 
         glfwMakeContextCurrent(window_);
+}
+
+// callback that gets invoked on every window size change
+void FramebufferSizeCallback(GLFWwindow *window, int width, int height) {
+        glViewport(0, 0, width, height);
+
+        // get the engine pointer for anything else that needs to be updated
+        Simplicity *engine = static_cast<Simplicity*>(glfwGetWindowUserPointer(window));
+
+        // update the renderer's notion of the window size
+        engine->renderer_.SetWindowDimensions(width, height);
 }
 
 }  /* namespace simplicity */

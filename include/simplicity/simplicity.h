@@ -11,6 +11,8 @@
 
 namespace simplicity {
 
+void FramebufferSizeCallback(GLFWwindow *window, int width, int height);
+
 class Simplicity {
 public:
         Simplicity();
