@@ -56,7 +56,7 @@ int main()
         simplicity::Entity entity("demo entity", 100, 100);
         simplicity::RendererError renderer_err = engine.renderer_.CreateRectangle(100, 100, entity);
         entity.coords_.y = 250.0;
-        entity.coords_.x = 100.0;
+        /* entity.coords_.x = 100.0; */
 
         // register input and event callbacks
         engine.input_handler_.RegisterInputEvent(simplicity::Event::kEscKeyPress, [&](){
@@ -66,19 +66,23 @@ int main()
         engine.input_handler_.RegisterInputEvent(simplicity::Event::kWKeyPress, [&](){
                         std::cout << "W key pressed." << std::endl;
                         entity.coords_.y += 13;
+                        entity.y_ += 13;
                         });
         engine.input_handler_.RegisterInputEvent(simplicity::Event::kAKeyPress, [&](){
                         std::cout << "A key pressed." << std::endl;
                         entity.coords_.x -= 10;
+                        entity.x_ -= 10;
                         world.view_location_.x -= 10;
                         });
         engine.input_handler_.RegisterInputEvent(simplicity::Event::kSKeyPress, [&](){
                         std::cout << "S key pressed." << std::endl;
                         entity.coords_.y -= 10;
+                        entity.y_ -= 10;
                         });
         engine.input_handler_.RegisterInputEvent(simplicity::Event::kDKeyPress, [&](){
                         std::cout << "D key pressed." << std::endl;
                         entity.coords_.x += 10;
+                        entity.x_ += 10;
                         world.view_location_.x += 10;
                         });
 
@@ -128,6 +132,7 @@ void CreateFloorBlocks() {
                 resource_manager.Allocate((void*&) floor, sizeof(simplicity::Entity));
                 engine.renderer_.CreateRectangle(100, 100, *floor);
                 floor->coords_.x = i * 200;
+                floor->x_ = i * 200;
                 floor->type_ = simplicity::EntityType::kFloor;
                 floor->width_ = 100;
                 floor->height_ = 100;
@@ -142,6 +147,7 @@ void SetUpEvents(simplicity::Entity &entity) {
                 // TODO determine "floor" by checking blocks
                 if (entity->coords_.y > 0)
                         entity->coords_.y -= 3;
+                        entity->y_ -= 3;
                 });
 
         world.RegisterBehavior(0, &entity);

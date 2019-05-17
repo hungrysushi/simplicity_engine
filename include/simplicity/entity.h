@@ -4,10 +4,11 @@
 
 #include "simplicity/types/common_types.h"
 #include "simplicity/types/entity_types.h"
+#include "newton/basic_entity.h"
 
 namespace simplicity {
 
-class Entity {
+class Entity : public BasicEntity {
 public:
         Entity(const std::string& label);
         Entity(const std::string& label, const EntityType type);

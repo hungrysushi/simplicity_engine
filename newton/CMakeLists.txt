@@ -6,6 +6,7 @@ set (CMAKE_BUILD_TYPE Debug)
 
 add_library(newton
         src/newton.cpp
+        src/basic_entity.cpp
         )
 
 target_include_directories (newton PUBLIC
