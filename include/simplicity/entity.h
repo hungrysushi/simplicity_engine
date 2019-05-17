@@ -11,6 +11,7 @@ class Entity {
 public:
         Entity(const std::string& label);
         Entity(const std::string& label, const EntityType type);
+        Entity(const std::string& label, const unsigned int width, const unsigned int height);
         ~Entity();
 
         void Initialize();
@@ -18,6 +19,10 @@ public:
         std::string label_;
         EntityType type_;
         Vec3 coords_;
+
+        // TODO refactor this
+        unsigned int height_;
+        unsigned int width_;
 
         // TODO Vertex and textures
         unsigned int vertex_id_;

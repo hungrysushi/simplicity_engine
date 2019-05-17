@@ -15,6 +15,14 @@ Entity::Entity(const std::string& label, const EntityType type) {
         // based on type, we may be able to set up some default behaviors
 }
 
+Entity::Entity(const std::string& label, const unsigned int width, const unsigned int height)
+        : label_(label),
+          width_(width),
+          height_(height) {
+
+        // nothing more to do yet
+}
+
 Entity::~Entity() {
 
 }

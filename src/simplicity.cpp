@@ -30,7 +30,8 @@ EngineError Simplicity::Initialize(const std::string& label) {
         // get the window resolution
         const GLFWvidmode *mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
-        InitWindow(mode->width, mode->height, label);
+        /* InitWindow(mode->width, mode->height, label); */
+        InitWindow(400, 600, label);
 
         // set up the default input handler
         input_handler_.Initialize(window_);
@@ -41,7 +42,8 @@ EngineError Simplicity::Initialize(const std::string& label) {
 
         // TODO initialize this without shader, set shader later
         renderer_.Initialize(shader);
-        renderer_.SetWindowDimensions(mode->width, mode->height);
+        /* renderer_.SetWindowDimensions(mode->width, mode->height); */
+        renderer_.SetWindowDimensions(400, 600);
 
         // TODO actually check errors
         return EngineError::kSuccess;
@@ -55,7 +57,8 @@ EngineError Simplicity::InitWindow(const int x, const int y, const std::string& 
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
         // create the window and save a handle
-        window_ = glfwCreateWindow(x, y, label.c_str(), glfwGetPrimaryMonitor(), NULL);
+        /* window_ = glfwCreateWindow(x, y, label.c_str(), glfwGetPrimaryMonitor(), NULL); */
+        window_ = glfwCreateWindow(x, y, label.c_str(), NULL, NULL);
 
         if (window_ == NULL) {
                 std::cout << "Failed to open window" << std::endl;

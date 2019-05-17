@@ -72,6 +72,48 @@ RendererError Renderer::GenerateVertexArrays(const float* vertices, const int nu
         return RendererError::kSuccess;
 }
 
+// give height and width in pixels, before view adjustment
+RendererError Renderer::CreateRectangle(const float x, const float y, Entity& entity) {
+
+        float x_norm = 0.0, y_norm = 0.0;
+
+        // make the longer side 1.0
+        if (x > y) {
+                x_norm = 1.0;
+                y_norm = y / x;
+        } else {
+                x_norm = x / y;
+                y_norm = 1.0;
+        }
+
+        // scale these sides for pixels
+        float x_pos = x_norm * x / window_dimensions_.x;
+        float y_pos = y_norm * y / window_dimensions_.y;
+
+        std::cout << x_pos << std::endl;
+        std::cout << y_pos << std::endl;
+
+        // just map a whole texture onto the rectangle, and set the color to
+        // some default.
+        // TODO make the color configurable
+        float vertices[] = {
+                // position             // color                // texture
+                x_pos, y_pos, 0.0f,     1.0f, 0.0f, 0.0f,       1.0f, 1.0f,
+                x_pos, -y_pos, 0.0f,    0.0f, 1.0f, 0.0f,       1.0f, 0.0f,
+                -x_pos, y_pos, 0.0f,    0.0f, 0.0f, 1.0f,       0.0f, 0.0f,
+                -x_pos, -y_pos, 0.0f,   1.0f, 1.0f, 0.0f,       0.0f, 1.0f,
+        };
+
+        // order in which to draw the points
+        unsigned int indices[] = {
+                0, 1, 2,        // first triangle
+                1, 3, 2,        // second triangle
+        };
+
+        // generate and bind vertex object to entity
+        return GenerateVertexArrays(vertices, sizeof(vertices), 8, 3, indices, sizeof(indices), entity);
+}
+
 RendererError Renderer::CreateRectangle(const float x, const float y, const float scale, Entity& entity) {
 
         float x_norm = 0.0, y_norm = 0.0;
