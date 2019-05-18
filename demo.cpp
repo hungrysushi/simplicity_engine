@@ -29,6 +29,8 @@ simplicity::ResourceManager resource_manager;
 uint64_t frames = 0;
 simplicity::Newton newton;
 
+simplicity::Entity floor_blocks[10];
+
 int main()
 {
         engine.Initialize("Demo");
@@ -56,12 +58,9 @@ int main()
 
         // create entities
         // ex RendererError renderer_err = renderer_.CreateRectangle(&entity);
-        simplicity::Entity entity("demo entity", 100, 100);
-        simplicity::RendererError renderer_err = engine.renderer_.CreateRectangle(100, 100, entity);
+        simplicity::Entity entity("demo entity", 25, 50);
+        simplicity::RendererError renderer_err = engine.renderer_.CreateRectangle(25, 50, entity);
         entity.coords_.y = 250.0;
-        /* entity.width_ = 100; */
-        /* entity.height_ = 100; */
-        /* entity.coords_.x = 100.0; */
 
         // register input and event callbacks
         engine.input_handler_.RegisterInputEvent(simplicity::Event::kEscKeyPress, [&](){
@@ -110,8 +109,6 @@ int main()
 
                 engine.ProcessUpdate();
                 std::cout << "Frame: " << frames++ << ", Elapsed time: " << engine.frame_elapsed_ns_.count() << std::endl;
-                std::cout << entity.coords_.x << std::endl;
-                std::cout << entity.coords_.y << std::endl;
 
                 // render the world
                 engine.renderer_.DrawWorld(world);
@@ -132,8 +129,8 @@ int main()
                         const simplicity::Entity& block = **it;
                         if (newton.AABB(entity, block)) {
                                 // todo resolve collision
-                                std::cout << "Collision" << std::endl;
                                 entity.coords_ = old_coords;
+                                /* ResolveCollision(); */
                         }
                 }
         }
@@ -146,18 +143,18 @@ void CreateFloorBlocks() {
         simplicity::Entity *floor;
 
         // this should be done based on the shortest side, since the scaling factor is a fraction of the shorter side
-        int block_width = 100;
+        int block_width = 50;
 
         for (int i = 0; i < 10; i++) {
-                // just create these on the heap for now
-                resource_manager.Allocate((void*&) floor, sizeof(simplicity::Entity));
-                engine.renderer_.CreateRectangle(block_width, block_width, *floor);
-                floor->coords_.x = i * block_width;
-                floor->type_ = simplicity::EntityType::kFloor;
-                floor->width_ = block_width;
-                floor->height_ = block_width;
+                // this is kind of wasteful, since these are all the same kind of block
+                // we should just reuse one array object
+                engine.renderer_.CreateRectangle(block_width, block_width, floor_blocks[i]);
+                floor_blocks[i].coords_.x = i * block_width;
+                floor_blocks[i].type_ = simplicity::EntityType::kFloor;
+                floor_blocks[i].width_ = block_width;
+                floor_blocks[i].height_ = block_width;
 
-                world.AddEntity(*floor);
+                world.AddEntity(floor_blocks[i]);
         }
 }
 

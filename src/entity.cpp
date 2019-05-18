@@ -3,6 +3,10 @@
 
 namespace simplicity {
 
+Entity::Entity() {
+
+}
+
 Entity::Entity(const std::string& label) {
         label_ = label;
         type_ = EntityType::kOther; // set up behaviors manually

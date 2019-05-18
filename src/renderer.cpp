@@ -64,7 +64,8 @@ RendererError Renderer::GenerateVertexArrays(const float* vertices, const int nu
         glBindVertexArray(0);
 
         // save our pointers into the entity
-        entity.vertex_id_ = vertex_buffer;
+        /* entity.vertex_id_ = vertex_buffer; */
+        entity.vertex_id_ = vertex_array;
         entity.num_points_ = num_indices;  // for an EBO, the number of points to draw is the number of indices
         entity.use_element_buffer_ = true;
 
@@ -75,23 +76,9 @@ RendererError Renderer::GenerateVertexArrays(const float* vertices, const int nu
 // give height and width in pixels, before view adjustment
 RendererError Renderer::CreateRectangle(const float x, const float y, Entity& entity) {
 
-        float x_norm = 0.0, y_norm = 0.0;
-
-        // make the longer side 1.0
-        if (x > y) {
-                x_norm = 1.0;
-                y_norm = y / x;
-        } else {
-                x_norm = x / y;
-                y_norm = 1.0;
-        }
-
         // scale these sides for pixels
-        float x_pos = x_norm * x / window_dimensions_.x;
-        float y_pos = y_norm * y / window_dimensions_.y;
-
-        std::cout << x_pos << std::endl;
-        std::cout << y_pos << std::endl;
+        float x_pos = x / window_dimensions_.x;
+        float y_pos = y / window_dimensions_.y;
 
         // just map a whole texture onto the rectangle, and set the color to
         // some default.
@@ -202,6 +189,7 @@ RendererError Renderer::DrawWorld(const World& world) {
                 // unbind
                 glDisable(GL_BLEND);
                 glBindTexture(GL_TEXTURE_2D, 0);
+                glBindVertexArray(0);
         }
 }
 

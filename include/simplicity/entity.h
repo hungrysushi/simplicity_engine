@@ -10,6 +10,7 @@ namespace simplicity {
 
 class Entity : public BasicEntity {
 public:
+        Entity();
         Entity(const std::string& label);
         Entity(const std::string& label, const EntityType type);
         Entity(const std::string& label, const unsigned int width, const unsigned int height);
