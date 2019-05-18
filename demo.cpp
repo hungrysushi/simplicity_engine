@@ -110,6 +110,8 @@ int main()
 
                 engine.ProcessUpdate();
                 std::cout << "Frame: " << frames++ << ", Elapsed time: " << engine.frame_elapsed_ns_.count() << std::endl;
+                std::cout << entity.coords_.x << std::endl;
+                std::cout << entity.coords_.y << std::endl;
 
                 // render the world
                 engine.renderer_.DrawWorld(world);
@@ -131,6 +133,7 @@ int main()
                         if (newton.AABB(entity, block)) {
                                 // todo resolve collision
                                 std::cout << "Collision" << std::endl;
+                                entity.coords_ = old_coords;
                         }
                 }
         }

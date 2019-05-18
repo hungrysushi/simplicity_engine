@@ -20,8 +20,8 @@ void main()
 {
         // adjust the world coordinates to the normalized gl coordinates
         vec3 relative_view = absolute_position - view_position;
-        vec3 normal_view = vec3(relative_view.x / window.x,
-                                relative_view.y / window.y,
+        vec3 normal_view = vec3(relative_view.x / window.x * 2,
+                                relative_view.y / window.y * 2,
                                 0.0);  // this is a 2D system, don't need this
 
         // shift the shape coordinates to the normalized position
