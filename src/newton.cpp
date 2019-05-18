@@ -18,10 +18,10 @@ Newton::~Newton() {
 // Takes two BasicEntities and returns true for a detected collision
 bool Newton::AABB(const BasicEntity& a, const BasicEntity& b) {
 
-        if (a.x_ < b.x_ + b.width_ &&
-            a.x_ + a.width_ > b.x_ &&
-            a.y_ < b.y_ + b.height_ &&
-            a.y_ + a.height_ > b.y_) {
+        if (a.coords_.x < b.coords_.x + b.width_ &&
+            a.coords_.x + a.width_ > b.coords_.x &&
+            a.coords_.y < b.coords_.y + b.height_ &&
+            a.coords_.y + a.height_ > b.coords_.y) {
                 return true;
         }
 

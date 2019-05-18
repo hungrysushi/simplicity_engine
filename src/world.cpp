@@ -34,7 +34,7 @@ WorldError World::PrintWorld() {
 }
 
 WorldError World::UpdateWorld() {
-        // update everything that has be registered, such as gravity or timed events
+        // update everything that has been registered, such as gravity or timed events
 
         for (auto it = behavior_map_.begin(); it != behavior_map_.end(); it++) {
                 // invoke the callback for each of the items in the stored vector

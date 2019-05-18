@@ -19,11 +19,7 @@ public:
 
         std::string label_;
         EntityType type_;
-        Vec3 coords_;
-
-        // TODO refactor this
-        unsigned int height_;
-        unsigned int width_;
+        /* Vec3 coords_; */
 
         // TODO Vertex and textures
         unsigned int vertex_id_;

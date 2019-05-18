@@ -17,9 +17,7 @@ Entity::Entity(const std::string& label, const EntityType type) {
 
 Entity::Entity(const std::string& label, const unsigned int width, const unsigned int height)
         : label_(label),
-          width_(width),
-          height_(height),
-          BasicEntity(height_, width_, 0, 250){
+          BasicEntity(height_, width_) {
 
         // nothing more to do yet
 }
