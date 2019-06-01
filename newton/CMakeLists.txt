@@ -13,5 +13,6 @@ target_include_directories (newton PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 target_link_libraries(newton LINK_PUBLIC
+        common
         )
 

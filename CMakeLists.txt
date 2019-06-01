@@ -14,8 +14,6 @@ add_library(simplicity_engine
         src/resource_manager.cpp
         src/shader.cpp
         src/world.cpp
-        src/newton.cpp
-        src/basic_entity.cpp
         )
 
 target_include_directories (simplicity_engine PUBLIC
@@ -25,10 +23,12 @@ target_link_libraries(simplicity_engine LINK_PUBLIC
         glad
         glfw ${GLFW_LIBRARIES}
         memory_pool
-        # newton
+        newton
+        common
         )
 
-# add_subdirectory(newton)
+add_subdirectory(newton)
+add_subdirectory(common)
 
 # 3rd party modules
 add_subdirectory(modules)

@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "simplicity/types/common_types.h"
+#include "common/types.h"
 #include "simplicity/types/shader_types.h"
 
 namespace simplicity {

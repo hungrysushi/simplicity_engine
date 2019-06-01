@@ -8,7 +8,7 @@
 #include <vector>
 
 #include "simplicity/entity.h"
-#include "simplicity/types/common_types.h"
+#include "common/types.h"
 #include "simplicity/types/world_types.h"
 
 namespace simplicity {

@@ -13,7 +13,7 @@
 #include "simplicity/resource_manager.h"
 #include "simplicity/shader.h"
 #include "simplicity/simplicity.h"
-#include "simplicity/types/common_types.h"
+#include "common/types.h"
 #include "simplicity/types/entity_types.h"
 #include "simplicity/types/renderer_types.h"
 #include "simplicity/types/world_types.h"
