@@ -7,7 +7,7 @@
 #include "GLFW/glfw3.h"
 
 #include "simplicity/input_handler.h"
-#include "simplicity/renderer.h"
+#include "renderer/renderer.h"
 #include "simplicity/types/simplicity_types.h"
 
 namespace simplicity {

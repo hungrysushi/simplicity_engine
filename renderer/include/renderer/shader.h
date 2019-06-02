@@ -3,7 +3,7 @@
 #include <string>
 
 #include "common/types.h"
-#include "simplicity/types/shader_types.h"
+#include "renderer/shader_types.h"
 
 namespace simplicity {
 

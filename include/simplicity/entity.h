@@ -2,13 +2,15 @@
 
 #include <string>
 
+#include "renderer/drawable.h"
+#include "newton/basic_entity.h"
+
 #include "common/types.h"
 #include "simplicity/types/entity_types.h"
-#include "newton/basic_entity.h"
 
 namespace simplicity {
 
-class Entity : public BasicEntity {
+class Entity : public Drawable, public BasicEntity {
 public:
         Entity();
         Entity(const std::string& label);
@@ -21,11 +23,6 @@ public:
         std::string label_;
         EntityType type_;
         /* Vec3 coords_; */
-
-        // TODO Vertex and textures
-        unsigned int vertex_id_;
-        unsigned int num_points_;
-        bool use_element_buffer_;
 };
 
 }  // namespace simplicity

@@ -10,9 +10,7 @@ add_library(simplicity_engine
         src/entity.cpp
         src/global_events.cpp
         src/input_handler.cpp
-        src/renderer.cpp
         src/resource_manager.cpp
-        src/shader.cpp
         src/world.cpp
         )
 
@@ -23,12 +21,14 @@ target_link_libraries(simplicity_engine LINK_PUBLIC
         glad
         glfw ${GLFW_LIBRARIES}
         memory_pool
-        newton
         common
+        newton
+        renderer
         )
 
-add_subdirectory(newton)
 add_subdirectory(common)
+add_subdirectory(newton)
+add_subdirectory(renderer)
 
 # 3rd party modules
 add_subdirectory(modules)

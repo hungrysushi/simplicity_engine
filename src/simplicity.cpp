@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "simplicity/shader.h"
+#include "renderer/shader.h"
 #include "simplicity/world.h"
 
 namespace simplicity

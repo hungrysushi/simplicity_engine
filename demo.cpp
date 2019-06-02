@@ -9,17 +9,18 @@
 #include <iostream>
 #include <string>
 
+#include "simplicity/simplicity.h"
 #include "simplicity/entity.h"
 #include "simplicity/resource_manager.h"
-#include "simplicity/shader.h"
-#include "simplicity/simplicity.h"
+#include "renderer/shader.h"
 #include "common/types.h"
 #include "simplicity/types/entity_types.h"
-#include "simplicity/types/renderer_types.h"
+#include "renderer/renderer_types.h"
 #include "simplicity/types/world_types.h"
 #include "simplicity/world.h"
 #include "newton/newton.h"
 
+void DrawWorld();
 void CreateFloorBlocks();
 void SetUpEvents(simplicity::Entity& entity);
 
@@ -111,7 +112,7 @@ int main()
                 std::cout << "Frame: " << frames++ << ", Elapsed time: " << engine.frame_elapsed_ns_.count() << std::endl;
 
                 // render the world
-                engine.renderer_.DrawWorld(world);
+                DrawWorld();
 
                 // process input
                 engine.input_handler_.ProcessInput();
@@ -136,6 +137,27 @@ int main()
         }
 
         return 0;
+}
+
+void DrawWorld() {
+        // Draw the background. Just sets a simple color for now
+        // TODO extend this to render more complex backgrounds, textures, etc
+        engine.renderer_.DrawBackground(world.background_color_);
+
+        // set the uniform for view location
+        engine.renderer_.shader_.SetVec3("view_position", world.view_location_);
+
+        for (auto it = world.entities_.begin(); it != world.entities_.end(); it++) {
+                // dereference entity
+                simplicity::Entity& entity = (simplicity::Entity&) **it;
+
+                // set shader uniforms for transforming this object
+                engine.renderer_.shader_.SetVec3("absolute_position", entity.coords_);
+                engine.renderer_.shader_.SetVec2("window", {engine.renderer_.window_dimensions_.x, engine.renderer_.window_dimensions_.y});
+
+                engine.renderer_.DrawObject(entity);
+        }
+
 }
 
 void CreateFloorBlocks() {

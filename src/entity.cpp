@@ -21,7 +21,8 @@ Entity::Entity(const std::string& label, const EntityType type) {
 
 Entity::Entity(const std::string& label, const unsigned int width, const unsigned int height)
         : label_(label),
-          BasicEntity(height_, width_) {
+          BasicEntity(height_, width_),
+          Drawable() {
 
         // nothing more to do yet
 }

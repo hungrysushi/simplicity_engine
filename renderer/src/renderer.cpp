@@ -1,5 +1,5 @@
 
-#include "simplicity/renderer.h"
+#include "renderer/renderer.h"
 
 #include <iostream>
 
@@ -27,7 +27,7 @@ RendererError Renderer::CreateTriangle() {
         // TODO
 }
 
-RendererError Renderer::GenerateVertexArrays(const float* vertices, const int num_vertices, const int vertex_stride, const int vertex_offset, const unsigned int* indices, const int num_indices, Entity& entity) {
+RendererError Renderer::GenerateVertexArrays(const float* vertices, const int num_vertices, const int vertex_stride, const int vertex_offset, const unsigned int* indices, const int num_indices, Drawable& entity) {
         // if indices are given, assume that they are groups of triangles
 
         unsigned int vertex_buffer, element_buffer, vertex_array;
@@ -64,7 +64,6 @@ RendererError Renderer::GenerateVertexArrays(const float* vertices, const int nu
         glBindVertexArray(0);
 
         // save our pointers into the entity
-        /* entity.vertex_id_ = vertex_buffer; */
         entity.vertex_id_ = vertex_array;
         entity.num_points_ = num_indices;  // for an EBO, the number of points to draw is the number of indices
         entity.use_element_buffer_ = true;
@@ -74,7 +73,7 @@ RendererError Renderer::GenerateVertexArrays(const float* vertices, const int nu
 }
 
 // give height and width in pixels, before view adjustment
-RendererError Renderer::CreateRectangle(const float x, const float y, Entity& entity) {
+RendererError Renderer::CreateRectangle(const float x, const float y, Drawable& entity) {
 
         // scale these sides for pixels
         float x_pos = x / window_dimensions_.x;
@@ -101,7 +100,7 @@ RendererError Renderer::CreateRectangle(const float x, const float y, Entity& en
         return GenerateVertexArrays(vertices, sizeof(vertices), 8, 3, indices, sizeof(indices), entity);
 }
 
-RendererError Renderer::CreateRectangle(const float x, const float y, const float scale, Entity& entity) {
+RendererError Renderer::CreateRectangle(const float x, const float y, const float scale, Drawable& entity) {
 
         float x_norm = 0.0, y_norm = 0.0;
 
@@ -139,58 +138,37 @@ RendererError Renderer::CreateRectangle(const float x, const float y, const floa
         return GenerateVertexArrays(vertices, sizeof(vertices), 8, 3, indices, sizeof(indices), entity);
 }
 
-RendererError Renderer::DrawObject() {
-        // TODO
+RendererError Renderer::DrawObject(const Drawable& drawable) {
+
+        // bind vertex buffers
+        glBindVertexArray(drawable.vertex_id_);
+
+        // render with vertex array or element buffer
+        if (drawable.use_element_buffer_) {
+                glDrawElements(GL_TRIANGLES, drawable.num_points_, GL_UNSIGNED_INT, 0);
+        } else {
+                glDrawArrays(GL_TRIANGLES, 0, drawable.num_points_);
+        }
+
+        // TODO draw texture
+
+        // unbind
+        glDisable(GL_BLEND);
+        glBindTexture(GL_TEXTURE_2D, 0);
+        glBindVertexArray(0);
 }
 
-RendererError Renderer::DrawWorld(const World& world) {
+RendererError Renderer::DrawBackground(const Vec4& color) {
 
-        // enable the shader
-        // TODO allow setting of different shaders
+        // TODO allow the setting of different shaders
         shader_.SetActive();
 
         // set background color from the world object
-        glClearColor(world.background_color_.x,
-                     world.background_color_.y,
-                     world.background_color_.z,
-                     world.background_color_.w);
+        glClearColor(color.x,
+                     color.y,
+                     color.z,
+                     color.w);
         glClear(GL_COLOR_BUFFER_BIT);
-
-        // pass in view params
-        shader_.SetVec3("view_position", world.view_location_);
-
-        // draw all entities
-        // TODO avoid excessive draw calls by filtering the entities we need to render
-        // NOTE this may cause problems with threading if someone else is acting on the world as it is rendered. We may need to iterate in a different way
-        for (auto it = world.entities_.begin(); it != world.entities_.end(); it ++) {
-
-                // dereference entitity
-                Entity *entity = (Entity*) *it;
-
-                // redundant call?
-                shader_.SetActive();
-
-                // set shader uniforms for view
-                shader_.SetVec3("absolute_position", entity->coords_);
-                shader_.SetVec2("window", {window_dimensions_.x, window_dimensions_.y});  // this will let us calculate proportions properly 
-
-                // TODO load texture
-
-                // bind vertex buffers
-                glBindVertexArray(entity->vertex_id_);
-
-                // render with vertex array or element buffer
-                if (entity->use_element_buffer_) {
-                        glDrawElements(GL_TRIANGLES, entity->num_points_, GL_UNSIGNED_INT, 0);
-                } else {
-                        glDrawArrays(GL_TRIANGLES, 0, entity->num_points_);
-                }
-
-                // unbind
-                glDisable(GL_BLEND);
-                glBindTexture(GL_TEXTURE_2D, 0);
-                glBindVertexArray(0);
-        }
 }
 
 RendererError Renderer::SetWindowDimensions(const int x, const int y) {

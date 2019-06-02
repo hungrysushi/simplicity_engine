@@ -4,7 +4,7 @@
 
 #include "gtest/gtest.h"
 
-#include "simplicity/shader.h"
+#include "renderer/shader.h"
 
 #include "simplicity/simplicity.h"
 
