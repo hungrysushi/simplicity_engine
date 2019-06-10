@@ -5,6 +5,8 @@
 #include "renderer/shader.h"
 #include "renderer/renderer_types.h"
 
+#include <string>
+
 namespace simplicity {
 
 class Renderer {
@@ -14,9 +16,10 @@ public:
 
         RendererError Initialize(Shader shader);
         RendererError CreateTriangle();
-        RendererError GenerateVertexArrays(const float* vertices, const int num_vertices, const int vertex_stride, const int vertex_offset, const unsigned int* indices, const int num_indices, Drawable& entity);
         RendererError CreateRectangle(const float x, const float y, Drawable& entity);
         RendererError CreateRectangle(const float x, const float y, const float scale, Drawable& entity);
+        RendererError GenerateVertexArrays(const float* vertices, const int num_vertices, const int vertex_stride, const int vertex_offset, const unsigned int* indices, const int num_indices, Drawable& entity);
+        RendererError GenerateTextures(const std::string& filename, unsigned int& texture);
         RendererError DrawObject(const Drawable& drawable);
         RendererError DrawBackground(const Vec4& color);
         RendererError SetWindowDimensions(const int x, const int y);

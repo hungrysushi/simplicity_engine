@@ -1,5 +1,6 @@
 
 #include "renderer/renderer.h"
+#include "renderer/images.h"
 
 #include <iostream>
 
@@ -25,6 +26,72 @@ RendererError Renderer::Initialize(Shader shader) {
 
 RendererError Renderer::CreateTriangle() {
         // TODO
+}
+
+// give height and width in pixels, before view adjustment
+RendererError Renderer::CreateRectangle(const float x, const float y, Drawable& entity) {
+
+        // scale these sides for pixels
+        float x_pos = x / window_dimensions_.x;
+        float y_pos = y / window_dimensions_.y;
+
+        // just map a whole texture onto the rectangle, and set the color to
+        // some default.
+        // TODO make the color configurable
+        float vertices[] = {
+                // position             // color                // texture
+                x_pos, y_pos, 0.0f,     1.0f, 0.0f, 0.0f,       1.0f, 1.0f,
+                x_pos, -y_pos, 0.0f,    0.0f, 1.0f, 0.0f,       1.0f, 0.0f,
+                -x_pos, -y_pos, 0.0f,   0.0f, 0.0f, 1.0f,       0.0f, 0.0f,
+                -x_pos, y_pos, 0.0f,    1.0f, 1.0f, 0.0f,       0.0f, 1.0f,
+        };
+
+        // order in which to draw the points
+        unsigned int indices[] = {
+                0, 1, 3,        // first triangle
+                1, 2, 3,        // second triangle
+        };
+
+        // generate and bind vertex object to entity
+        return GenerateVertexArrays(vertices, sizeof(vertices), 8, 3, indices, sizeof(indices), entity);
+}
+
+RendererError Renderer::CreateRectangle(const float x, const float y, const float scale, Drawable& entity) {
+
+        float x_norm = 0.0, y_norm = 0.0;
+
+        // make the longer side 1.0
+        if (x > y) {
+                x_norm = 1.0;
+                y_norm = y / x;
+        } else {
+                x_norm = x / y;
+                y_norm = 1.0;
+        }
+
+        // scale these sides for view space
+        float x_pos = x_norm * scale;
+        float y_pos = y_norm * scale;
+
+        // just map a whole texture onto the rectangle, and set the color to
+        // some default.
+        // TODO make the color configurable
+        float vertices[] = {
+                // position             // color                // texture
+                x_pos * window_proportions_.x, y_pos * window_proportions_.y, 0.0f,     1.0f, 0.0f, 0.0f,       1.0f, 1.0f,
+                x_pos * window_proportions_.x, -y_pos * window_proportions_.y, 0.0f,    0.0f, 1.0f, 0.0f,       1.0f, 0.0f,
+                -x_pos * window_proportions_.x, y_pos * window_proportions_.y, 0.0f,    0.0f, 0.0f, 1.0f,       0.0f, 0.0f,
+                -x_pos * window_proportions_.x, -y_pos * window_proportions_.y, 0.0f,   1.0f, 1.0f, 0.0f,       0.0f, 1.0f,
+        };
+
+        // order in which to draw the points
+        unsigned int indices[] = {
+                0, 1, 2,        // first triangle
+                1, 3, 2,        // second triangle
+        };
+
+        // generate and bind vertex object to entity
+        return GenerateVertexArrays(vertices, sizeof(vertices), 8, 3, indices, sizeof(indices), entity);
 }
 
 RendererError Renderer::GenerateVertexArrays(const float* vertices, const int num_vertices, const int vertex_stride, const int vertex_offset, const unsigned int* indices, const int num_indices, Drawable& entity) {
@@ -72,73 +139,61 @@ RendererError Renderer::GenerateVertexArrays(const float* vertices, const int nu
         return RendererError::kSuccess;
 }
 
-// give height and width in pixels, before view adjustment
-RendererError Renderer::CreateRectangle(const float x, const float y, Drawable& entity) {
+RendererError Renderer::GenerateTextures(const std::string& filename, unsigned int& texture) {
 
-        // scale these sides for pixels
-        float x_pos = x / window_dimensions_.x;
-        float y_pos = y / window_dimensions_.y;
+        // load data from filename
+        int width, height, channels;
+        char* texture_data = Images::LoadPng(filename, width, height, channels);
 
-        // just map a whole texture onto the rectangle, and set the color to
-        // some default.
-        // TODO make the color configurable
-        float vertices[] = {
-                // position             // color                // texture
-                x_pos, y_pos, 0.0f,     1.0f, 0.0f, 0.0f,       1.0f, 1.0f,
-                x_pos, -y_pos, 0.0f,    0.0f, 1.0f, 0.0f,       1.0f, 0.0f,
-                -x_pos, y_pos, 0.0f,    0.0f, 0.0f, 1.0f,       0.0f, 0.0f,
-                -x_pos, -y_pos, 0.0f,   1.0f, 1.0f, 0.0f,       0.0f, 1.0f,
-        };
-
-        // order in which to draw the points
-        unsigned int indices[] = {
-                0, 1, 2,        // first triangle
-                1, 3, 2,        // second triangle
-        };
-
-        // generate and bind vertex object to entity
-        return GenerateVertexArrays(vertices, sizeof(vertices), 8, 3, indices, sizeof(indices), entity);
-}
-
-RendererError Renderer::CreateRectangle(const float x, const float y, const float scale, Drawable& entity) {
-
-        float x_norm = 0.0, y_norm = 0.0;
-
-        // make the longer side 1.0
-        if (x > y) {
-                x_norm = 1.0;
-                y_norm = y / x;
-        } else {
-                x_norm = x / y;
-                y_norm = 1.0;
+        if (!texture_data) {
+                std::cout << "Failed to load texture " << filename << std::endl;
         }
 
-        // scale these sides for view space
-        float x_pos = x_norm * scale;
-        float y_pos = y_norm * scale;
+        // determine format
+        GLenum format;
+        switch (channels) {
+                case 1:
+                        format = GL_RED;
+                        break;
+                case 3:
+                        format = GL_RGB;
+                        break;
+                case 4:
+                        format = GL_RGBA;
+                        break;
+                default:
+                        break;
+        }
 
-        // just map a whole texture onto the rectangle, and set the color to
-        // some default.
-        // TODO make the color configurable
-        float vertices[] = {
-                // position             // color                // texture
-                x_pos * window_proportions_.x, y_pos * window_proportions_.y, 0.0f,     1.0f, 0.0f, 0.0f,       1.0f, 1.0f,
-                x_pos * window_proportions_.x, -y_pos * window_proportions_.y, 0.0f,    0.0f, 1.0f, 0.0f,       1.0f, 0.0f,
-                -x_pos * window_proportions_.x, y_pos * window_proportions_.y, 0.0f,    0.0f, 0.0f, 1.0f,       0.0f, 0.0f,
-                -x_pos * window_proportions_.x, -y_pos * window_proportions_.y, 0.0f,   1.0f, 1.0f, 0.0f,       0.0f, 1.0f,
-        };
+        glGenTextures(1, &texture);
+        glBindTexture(GL_TEXTURE_2D, texture);
 
-        // order in which to draw the points
-        unsigned int indices[] = {
-                0, 1, 2,        // first triangle
-                1, 3, 2,        // second triangle
-        };
+        // set parameters
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-        // generate and bind vertex object to entity
-        return GenerateVertexArrays(vertices, sizeof(vertices), 8, 3, indices, sizeof(indices), entity);
+        // load the data into the texture
+        glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, texture_data);
+
+        // mipmap for distances
+        glGenerateMipmap(GL_TEXTURE_2D);
+
+        // free up the buffer
+        delete [] texture_data;
 }
 
 RendererError Renderer::DrawObject(const Drawable& drawable) {
+
+        // I'm not positive this is a valid test for a texture
+        if (drawable.texture_ > 0) {
+                shader_.SetInt("texture_enable", drawable.texture_);
+                // draw single texture
+                shader_.SetInt("texture1", 0);
+                glActiveTexture(GL_TEXTURE0);
+                glBindTexture(GL_TEXTURE_2D, drawable.texture_);
+        }
 
         // bind vertex buffers
         glBindVertexArray(drawable.vertex_id_);
@@ -149,8 +204,6 @@ RendererError Renderer::DrawObject(const Drawable& drawable) {
         } else {
                 glDrawArrays(GL_TRIANGLES, 0, drawable.num_points_);
         }
-
-        // TODO draw texture
 
         // unbind
         glDisable(GL_BLEND);

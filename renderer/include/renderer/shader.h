@@ -14,6 +14,7 @@ public:
 
         ShaderError Initialize(const char* vertex_path, const char* fragment_path);
         ShaderError SetActive();
+        ShaderError SetInt(const std::string& name, const int value);
         ShaderError SetVec2(const std::string& name, const Vec2& value);
         ShaderError SetVec3(const std::string& name, const Vec3& value);
 

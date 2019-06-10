@@ -62,6 +62,7 @@ int main()
         simplicity::Entity entity("demo entity", 25, 50);
         simplicity::RendererError renderer_err = engine.renderer_.CreateRectangle(25, 50, entity);
         entity.coords_.y = 250.0;
+        engine.renderer_.GenerateTextures("../mario.png", entity.texture_);
 
         // register input and event callbacks
         engine.input_handler_.RegisterInputEvent(simplicity::Event::kEscKeyPress, [&](){
@@ -167,6 +168,9 @@ void CreateFloorBlocks() {
         // this should be done based on the shortest side, since the scaling factor is a fraction of the shorter side
         int block_width = 50;
 
+        unsigned int texture;
+        engine.renderer_.GenerateTextures("../brick.png", texture);
+
         for (int i = 0; i < 10; i++) {
                 // this is kind of wasteful, since these are all the same kind of block
                 // we should just reuse one array object
@@ -175,6 +179,7 @@ void CreateFloorBlocks() {
                 floor_blocks[i].type_ = simplicity::EntityType::kFloor;
                 floor_blocks[i].width_ = block_width;
                 floor_blocks[i].height_ = block_width;
+                floor_blocks[i].texture_ = texture;
 
                 world.AddEntity(floor_blocks[i]);
         }
