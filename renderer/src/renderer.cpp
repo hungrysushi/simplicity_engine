@@ -193,6 +193,8 @@ RendererError Renderer::DrawObject(const Drawable& drawable) {
                 shader_.SetInt("texture1", 0);
                 glActiveTexture(GL_TEXTURE0);
                 glBindTexture(GL_TEXTURE_2D, drawable.texture_);
+                glEnable(GL_BLEND);
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         }
 
         // bind vertex buffers
